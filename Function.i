@@ -94,5 +94,14 @@ public:
     FunctionPtr __sub__() {
       return - *self;
     }
+
+    LinearTermPtr __mul__(VarPtr) {
+      return *self * VarPtr:
+    }
+
+    LinearTermPtr __rmul__(VarPtr) {
+      return *self * VarPtr:
+    }
+
   }
 };
