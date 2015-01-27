@@ -53,6 +53,8 @@ public:
       return *self - a;
     }
 
+  }
+}
     //for FunctionPtr and VarPtr without linear term
     //add in the Function and Var .i files
     //VarPtr and double
