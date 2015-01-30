@@ -7,7 +7,7 @@
 class IP{
 public:
   IP();
-  void AddTerm(LinearTermPtr a);
-  void AddTerm(VarPtr v);
-  LinearTermPtr(VarPtr v);
-}
+  void addTerm(LinearTermPtr a);
+  void addTerm(VarPtr v);
+  LinearTermPtr evaluate(map< int, FunctionPtr> &varFunctions);
+};

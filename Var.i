@@ -1,6 +1,7 @@
 %module Var
 %{
 #include "Var.h"
+#include "LinearTerm.h"
 %}
 
 %include "std_string.i"

@@ -5,21 +5,21 @@
 
 %include "std_string.i"
 
-class LinearTerm{
+class LinearTerm {
 public:
-  void LinearTerm();
+  LinearTerm();
   const set<int> & varIDs();
   VarType termType();
   FunctionPtr evaluate(map< int, FunctionPtr> &varFunctions);
-  int Rank();
+  int rank();
   string displayString();
 
-}
+ };
 
-class LinerTermPtr{
+class LinearTermPtr{
 public:
   LinearTerm* operator->();
-
+ 
   %extend {
     LinearTermPtr __add__(LinearTermPtr a){
       return *self + a;
@@ -32,11 +32,12 @@ public:
     LinearTermPtr __radd__(VarPtr v){
       return *self + v;
     }
-
-    LinearTermPtr __rmul__(FunctionPtr f) {
-      return *self * f;
+    /**
+       This needs to be added to Var.i in order to work
+    LinearTermPtr __rmul__(VarPtr v) {
+      return *self * v;
     }
-
+    **/
     LinearTermPtr __sub__() { 
       return - *self;
     }
@@ -54,7 +55,8 @@ public:
     }
 
   }
-}
+
+};
     //for FunctionPtr and VarPtr without linear term
     //add in the Function and Var .i files
     //VarPtr and double
