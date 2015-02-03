@@ -48,9 +48,9 @@ $CPP -shared IP_wrap.o -o _IP.so $LINK_ALL
 #$CPP -c -Wall -fpic BC_wrap.cxx $INCLUDE_ALL
 #$CPP -shared BC_wrap.o -o _BC.so $LINK_ALL
 
-swig -Wall -c++ -python -I$CAMELLIA_INCLUDE RHS.i
-$CPP -c -Wall -fpic RHS_wrap.cxx $INCLUDE_ALL
-$CPP -shared RHS_wrap.o -o _RHS.so $LINK_ALL
+#swig -Wall -c++ -python -I$CAMELLIA_INCLUDE RHS.i
+#$CPP -c -Wall -fpic RHS_wrap.cxx $INCLUDE_ALL
+#$CPP -shared RHS_wrap.o -o _RHS.so $LINK_ALL
 
 #swig -Wall -c++ -python -I$CAMELLIA_INCLUDE Mesh.i
 #$CPP -c -Wall -fpic Mesh_wrap.cxx $INCLUDE_ALL

@@ -3,7 +3,7 @@
 #include "RHS.h"
 %}
 
-%nodefaultctor RHS;
+%nodefaultctor RHS
 class RHS {
 public:
   bool nonZeroRHS(int testVarID);

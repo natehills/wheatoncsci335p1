@@ -2936,10 +2936,11 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 
 #define SWIGTYPE_p_LinearTermPtr swig_types[0]
 #define SWIGTYPE_p_RHS swig_types[1]
-#define SWIGTYPE_p_VarPtr swig_types[2]
-#define SWIGTYPE_p_char swig_types[3]
-static swig_type_info *swig_types[5];
-static swig_module_info swig_module = {swig_types, 4, 0, 0, 0, 0};
+#define SWIGTYPE_p_RHSPtr swig_types[2]
+#define SWIGTYPE_p_VarPtr swig_types[3]
+#define SWIGTYPE_p_char swig_types[4]
+static swig_type_info *swig_types[6];
+static swig_module_info swig_module = {swig_types, 5, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3190,9 +3191,6 @@ SWIGINTERNINLINE PyObject*
   return PyBool_FromLong(value ? 1 : 0);
 }
 
-SWIGINTERN RHS *new_RHS(){
-     return  RHS(false);
-    }
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -3393,13 +3391,13 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_RHS(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_RHS_rhs(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  RHS *result = 0 ;
+  RHSPtr result;
   
-  if (!PyArg_ParseTuple(args,(char *)":new_RHS")) SWIG_fail;
-  result = (RHS *)new_RHS();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_RHS, SWIG_POINTER_NEW |  0 );
+  if (!PyArg_ParseTuple(args,(char *)":RHS_rhs")) SWIG_fail;
+  result = RHS::rhs();
+  resultobj = SWIG_NewPointerObj((new RHSPtr(static_cast< const RHSPtr& >(result))), SWIGTYPE_p_RHSPtr, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -3434,15 +3432,306 @@ SWIGINTERN PyObject *RHS_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_RHSPtr___deref__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  RHSPtr *arg1 = (RHSPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  RHS *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:RHSPtr___deref__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_RHSPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RHSPtr___deref__" "', argument " "1"" of type '" "RHSPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< RHSPtr * >(argp1);
+  result = (RHS *)(arg1)->operator ->();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_RHS, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_RHSPtr(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  RHSPtr *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_RHSPtr")) SWIG_fail;
+  result = (RHSPtr *)new RHSPtr();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_RHSPtr, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_RHSPtr(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  RHSPtr *arg1 = (RHSPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_RHSPtr",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_RHSPtr, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_RHSPtr" "', argument " "1"" of type '" "RHSPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< RHSPtr * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RHSPtr_nonZeroRHS(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  RHSPtr *arg1 = (RHSPtr *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:RHSPtr_nonZeroRHS",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_RHSPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RHSPtr_nonZeroRHS" "', argument " "1"" of type '" "RHSPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< RHSPtr * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RHSPtr_nonZeroRHS" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (bool)(*arg1)->nonZeroRHS(arg2);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RHSPtr_addTerm__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  RHSPtr *arg1 = (RHSPtr *) 0 ;
+  LinearTermPtr arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:RHSPtr_addTerm",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_RHSPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RHSPtr_addTerm" "', argument " "1"" of type '" "RHSPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< RHSPtr * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LinearTermPtr,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RHSPtr_addTerm" "', argument " "2"" of type '" "LinearTermPtr""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RHSPtr_addTerm" "', argument " "2"" of type '" "LinearTermPtr""'");
+    } else {
+      LinearTermPtr * temp = reinterpret_cast< LinearTermPtr * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  (*arg1)->addTerm(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RHSPtr_addTerm__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  RHSPtr *arg1 = (RHSPtr *) 0 ;
+  VarPtr arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:RHSPtr_addTerm",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_RHSPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RHSPtr_addTerm" "', argument " "1"" of type '" "RHSPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< RHSPtr * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_VarPtr,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RHSPtr_addTerm" "', argument " "2"" of type '" "VarPtr""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RHSPtr_addTerm" "', argument " "2"" of type '" "VarPtr""'");
+    } else {
+      VarPtr * temp = reinterpret_cast< VarPtr * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  (*arg1)->addTerm(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RHSPtr_addTerm(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_RHSPtr, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_LinearTermPtr, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_RHSPtr_addTerm__SWIG_0(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_RHSPtr, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_VarPtr, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_RHSPtr_addTerm__SWIG_1(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RHSPtr_addTerm'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    RHS::addTerm(LinearTermPtr)\n"
+    "    RHS::addTerm(VarPtr)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_RHSPtr_linearTerm(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  RHSPtr *arg1 = (RHSPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  LinearTermPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:RHSPtr_linearTerm",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_RHSPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RHSPtr_linearTerm" "', argument " "1"" of type '" "RHSPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< RHSPtr * >(argp1);
+  result = (*arg1)->linearTerm();
+  resultobj = SWIG_NewPointerObj((new LinearTermPtr(static_cast< const LinearTermPtr& >(result))), SWIGTYPE_p_LinearTermPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RHSPtr_linearTermCopy(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  RHSPtr *arg1 = (RHSPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  LinearTermPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:RHSPtr_linearTermCopy",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_RHSPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RHSPtr_linearTermCopy" "', argument " "1"" of type '" "RHSPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< RHSPtr * >(argp1);
+  result = (*arg1)->linearTermCopy();
+  resultobj = SWIG_NewPointerObj((new LinearTermPtr(static_cast< const LinearTermPtr& >(result))), SWIGTYPE_p_LinearTermPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RHSPtr_rhs(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  RHSPtr *arg1 = (RHSPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  RHSPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:RHSPtr_rhs",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_RHSPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RHSPtr_rhs" "', argument " "1"" of type '" "RHSPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< RHSPtr * >(argp1);
+  result = (*arg1)->rhs();
+  resultobj = SWIG_NewPointerObj((new RHSPtr(static_cast< const RHSPtr& >(result))), SWIGTYPE_p_RHSPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *RHSPtr_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_RHSPtr, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"RHS_nonZeroRHS", _wrap_RHS_nonZeroRHS, METH_VARARGS, NULL},
 	 { (char *)"RHS_addTerm", _wrap_RHS_addTerm, METH_VARARGS, NULL},
 	 { (char *)"RHS_linearTerm", _wrap_RHS_linearTerm, METH_VARARGS, NULL},
 	 { (char *)"RHS_linearTermCopy", _wrap_RHS_linearTermCopy, METH_VARARGS, NULL},
-	 { (char *)"new_RHS", _wrap_new_RHS, METH_VARARGS, NULL},
+	 { (char *)"RHS_rhs", _wrap_RHS_rhs, METH_VARARGS, NULL},
 	 { (char *)"delete_RHS", _wrap_delete_RHS, METH_VARARGS, NULL},
 	 { (char *)"RHS_swigregister", RHS_swigregister, METH_VARARGS, NULL},
+	 { (char *)"RHSPtr___deref__", _wrap_RHSPtr___deref__, METH_VARARGS, NULL},
+	 { (char *)"new_RHSPtr", _wrap_new_RHSPtr, METH_VARARGS, NULL},
+	 { (char *)"delete_RHSPtr", _wrap_delete_RHSPtr, METH_VARARGS, NULL},
+	 { (char *)"RHSPtr_nonZeroRHS", _wrap_RHSPtr_nonZeroRHS, METH_VARARGS, NULL},
+	 { (char *)"RHSPtr_addTerm", _wrap_RHSPtr_addTerm, METH_VARARGS, NULL},
+	 { (char *)"RHSPtr_linearTerm", _wrap_RHSPtr_linearTerm, METH_VARARGS, NULL},
+	 { (char *)"RHSPtr_linearTermCopy", _wrap_RHSPtr_linearTermCopy, METH_VARARGS, NULL},
+	 { (char *)"RHSPtr_rhs", _wrap_RHSPtr_rhs, METH_VARARGS, NULL},
+	 { (char *)"RHSPtr_swigregister", RHSPtr_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -3451,24 +3740,28 @@ static PyMethodDef SwigMethods[] = {
 
 static swig_type_info _swigt__p_LinearTermPtr = {"_p_LinearTermPtr", "LinearTermPtr *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_RHS = {"_p_RHS", "RHS *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_RHSPtr = {"_p_RHSPtr", "RHSPtr *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_VarPtr = {"_p_VarPtr", "VarPtr *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_LinearTermPtr,
   &_swigt__p_RHS,
+  &_swigt__p_RHSPtr,
   &_swigt__p_VarPtr,
   &_swigt__p_char,
 };
 
 static swig_cast_info _swigc__p_LinearTermPtr[] = {  {&_swigt__p_LinearTermPtr, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_RHS[] = {  {&_swigt__p_RHS, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_RHSPtr[] = {  {&_swigt__p_RHSPtr, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_VarPtr[] = {  {&_swigt__p_VarPtr, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_LinearTermPtr,
   _swigc__p_RHS,
+  _swigc__p_RHSPtr,
   _swigc__p_VarPtr,
   _swigc__p_char,
 };
