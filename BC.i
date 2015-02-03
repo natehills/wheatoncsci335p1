@@ -1,19 +1,23 @@
 %module BC
 %{
 #include "BC.h"
-%}
+  %}
 
-%include "std_string.i"
-
-%nodefaultctor BC;  // Disable the default constructor for class BC
 
 class BC {
-public:
-  void addDirichlet( VarPtr traceOrFlux, SpatialFilterPtr spatialPoints, FunctionPtr valueFunction );
-  static BCPtr bc();
-};
+ public:
 
-class BCPtr {
-public:
-  BC* operator->();
-};
+  BC(legacySubclass = false);
+  bool bcsImposed(int varID);
+  bool singlePointBC(int varID);
+  double valueForSinglePointBC(int varID);
+  GlobalIndexType vertexForSinglePointBC(int varID);
+  bool imposeZeroMeanConstraint(int varID);
+  void addDirichlet(VarPtr traceOrFlux, SpatialFilterPtr spatialPoints, FunctionPtr valueFunction);
+  void addSinglePointBC( int fieldID, double value,GlobalIndexType meshVertexNumber = -1 );
+  void addZeroMeanConstraint( VarPtr field );
+  void removeZeroMeanConstraint( int fieldID );
+  pair<SpatialFilterPtr, FunctionPtr> getDirichletBC(int varID);
+  FunctionPtr getSpatiallyFilteredFunctionForDirichletBC(int varID);
+
+}
