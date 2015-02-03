@@ -80,6 +80,13 @@ class VarFactory(_object):
         try: self.this.append(this)
         except: self.this = this
     def fluxVar(self, *args): return _VarFactory.VarFactory_fluxVar(self, *args)
+    def test(self, *args): return _VarFactory.VarFactory_test(self, *args)
+    def trial(self, *args): return _VarFactory.VarFactory_trial(self, *args)
+    def testIDs(self): return _VarFactory.VarFactory_testIDs(self)
+    def trialIDs(self): return _VarFactory.VarFactory_trialIDs(self)
+    def fieldVars(self): return _VarFactory.VarFactory_fieldVars(self)
+    def fluxVars(self): return _VarFactory.VarFactory_fluxVars(self)
+    def traceVars(self): return _VarFactory.VarFactory_traceVars(self)
     def testVar(self, *args): return _VarFactory.VarFactory_testVar(self, *args)
     def fieldVar(self, *args): return _VarFactory.VarFactory_fieldVar(self, *args)
     def traceVar(self, *args): return _VarFactory.VarFactory_traceVar(self, *args)
