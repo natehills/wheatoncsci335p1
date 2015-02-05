@@ -2,7 +2,7 @@ from Function import *
 import Function
 import unittest
 
-class FunctionTest(unittest.TestCase):
+class FunctionXNYNTest(unittest.TestCase):
   """Test xn  and yn"""
   def testXNYN(self):
     x3 = Function.Function_xn(3)

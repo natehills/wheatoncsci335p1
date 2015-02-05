@@ -4072,6 +4072,28 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Function_constant(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  double arg1 ;
+  double val1 ;
+  int ecode1 = 0 ;
+  PyObject * obj0 = 0 ;
+  FunctionPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Function_constant",&obj0)) SWIG_fail;
+  ecode1 = SWIG_AsVal_double(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "Function_constant" "', argument " "1"" of type '" "double""'");
+  } 
+  arg1 = static_cast< double >(val1);
+  result = Function::constant(arg1);
+  resultobj = SWIG_NewPointerObj((new FunctionPtr(static_cast< const FunctionPtr& >(result))), SWIGTYPE_p_FunctionPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_Function_vectorize(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   FunctionPtr arg1 ;
@@ -5940,6 +5962,37 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_FunctionPtr_constant(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  FunctionPtr *arg1 = (FunctionPtr *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  FunctionPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:FunctionPtr_constant",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_FunctionPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "FunctionPtr_constant" "', argument " "1"" of type '" "FunctionPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< FunctionPtr * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "FunctionPtr_constant" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  result = (*arg1)->constant(arg2);
+  resultobj = SWIG_NewPointerObj((new FunctionPtr(static_cast< const FunctionPtr& >(result))), SWIGTYPE_p_FunctionPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_FunctionPtr_vectorize(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   FunctionPtr *arg1 = (FunctionPtr *) 0 ;
@@ -6118,6 +6171,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Function_xn", _wrap_Function_xn, METH_VARARGS, NULL},
 	 { (char *)"Function_yn", _wrap_Function_yn, METH_VARARGS, NULL},
 	 { (char *)"Function_composedFunction", _wrap_Function_composedFunction, METH_VARARGS, NULL},
+	 { (char *)"Function_constant", _wrap_Function_constant, METH_VARARGS, NULL},
 	 { (char *)"Function_vectorize", _wrap_Function_vectorize, METH_VARARGS, NULL},
 	 { (char *)"Function_normal", _wrap_Function_normal, METH_VARARGS, NULL},
 	 { (char *)"Function_solution", _wrap_Function_solution, METH_VARARGS, NULL},
@@ -6148,6 +6202,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"FunctionPtr_xn", _wrap_FunctionPtr_xn, METH_VARARGS, NULL},
 	 { (char *)"FunctionPtr_yn", _wrap_FunctionPtr_yn, METH_VARARGS, NULL},
 	 { (char *)"FunctionPtr_composedFunction", _wrap_FunctionPtr_composedFunction, METH_VARARGS, NULL},
+	 { (char *)"FunctionPtr_constant", _wrap_FunctionPtr_constant, METH_VARARGS, NULL},
 	 { (char *)"FunctionPtr_vectorize", _wrap_FunctionPtr_vectorize, METH_VARARGS, NULL},
 	 { (char *)"FunctionPtr_normal", _wrap_FunctionPtr_normal, METH_VARARGS, NULL},
 	 { (char *)"FunctionPtr_solution", _wrap_FunctionPtr_solution, METH_VARARGS, NULL},

@@ -2934,11 +2934,14 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_Var swig_types[0]
-#define SWIGTYPE_p_VarPtr swig_types[1]
-#define SWIGTYPE_p_char swig_types[2]
-static swig_type_info *swig_types[4];
-static swig_module_info swig_module = {swig_types, 3, 0, 0, 0, 0};
+#define SWIGTYPE_p_FunctionPtr swig_types[0]
+#define SWIGTYPE_p_LinearTermPtr swig_types[1]
+#define SWIGTYPE_p_Var swig_types[2]
+#define SWIGTYPE_p_VarPtr swig_types[3]
+#define SWIGTYPE_p_char swig_types[4]
+#define SWIGTYPE_p_vectorT_double_t swig_types[5]
+static swig_type_info *swig_types[7];
+static swig_module_info swig_module = {swig_types, 6, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3048,9 +3051,565 @@ SWIGINTERNINLINE PyObject*
   return PyInt_FromLong((long) value);
 }
 
+
+SWIGINTERN swig_type_info*
+SWIG_pchar_descriptor(void)
+{
+  static int init = 0;
+  static swig_type_info* info = 0;
+  if (!init) {
+    info = SWIG_TypeQuery("_p_char");
+    init = 1;
+  }
+  return info;
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_FromCharPtrAndSize(const char* carray, size_t size)
+{
+  if (carray) {
+    if (size > INT_MAX) {
+      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+      return pchar_descriptor ? 
+	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
+    } else {
+#if PY_VERSION_HEX >= 0x03000000
+#if PY_VERSION_HEX >= 0x03010000
+      return PyUnicode_DecodeUTF8(carray, static_cast< int >(size), "surrogateescape");
+#else
+      return PyUnicode_FromStringAndSize(carray, static_cast< int >(size));
+#endif
+#else
+      return PyString_FromStringAndSize(carray, static_cast< int >(size));
+#endif
+    }
+  } else {
+    return SWIG_Py_Void();
+  }
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_std_string  (const std::string& s)
+{
+  return SWIG_FromCharPtrAndSize(s.data(), s.size());
+}
+
+
+#include <limits.h>
+#if !defined(SWIG_NO_LLONG_MAX)
+# if !defined(LLONG_MAX) && defined(__GNUC__) && defined (__LONG_LONG_MAX__)
+#   define LLONG_MAX __LONG_LONG_MAX__
+#   define LLONG_MIN (-LLONG_MAX - 1LL)
+#   define ULLONG_MAX (LLONG_MAX * 2ULL + 1ULL)
+# endif
+#endif
+
+
+SWIGINTERN int
+SWIG_AsVal_double (PyObject *obj, double *val)
+{
+  int res = SWIG_TypeError;
+  if (PyFloat_Check(obj)) {
+    if (val) *val = PyFloat_AsDouble(obj);
+    return SWIG_OK;
+  } else if (PyInt_Check(obj)) {
+    if (val) *val = PyInt_AsLong(obj);
+    return SWIG_OK;
+  } else if (PyLong_Check(obj)) {
+    double v = PyLong_AsDouble(obj);
+    if (!PyErr_Occurred()) {
+      if (val) *val = v;
+      return SWIG_OK;
+    } else {
+      PyErr_Clear();
+    }
+  }
+#ifdef SWIG_PYTHON_CAST_MODE
+  {
+    int dispatch = 0;
+    double d = PyFloat_AsDouble(obj);
+    if (!PyErr_Occurred()) {
+      if (val) *val = d;
+      return SWIG_AddCast(SWIG_OK);
+    } else {
+      PyErr_Clear();
+    }
+    if (!dispatch) {
+      long v = PyLong_AsLong(obj);
+      if (!PyErr_Occurred()) {
+	if (val) *val = v;
+	return SWIG_AddCast(SWIG_AddCast(SWIG_OK));
+      } else {
+	PyErr_Clear();
+      }
+    }
+  }
+#endif
+  return res;
+}
+
+
+#include <float.h>
+
+
+#include <math.h>
+
+
+SWIGINTERNINLINE int
+SWIG_CanCastAsInteger(double *d, double min, double max) {
+  double x = *d;
+  if ((min <= x && x <= max)) {
+   double fx = floor(x);
+   double cx = ceil(x);
+   double rd =  ((x - fx) < 0.5) ? fx : cx; /* simple rint */
+   if ((errno == EDOM) || (errno == ERANGE)) {
+     errno = 0;
+   } else {
+     double summ, reps, diff;
+     if (rd < x) {
+       diff = x - rd;
+     } else if (rd > x) {
+       diff = rd - x;
+     } else {
+       return 1;
+     }
+     summ = rd + x;
+     reps = diff/summ;
+     if (reps < 8*DBL_EPSILON) {
+       *d = rd;
+       return 1;
+     }
+   }
+  }
+  return 0;
+}
+
+
+SWIGINTERN int
+SWIG_AsVal_long (PyObject *obj, long* val)
+{
+  if (PyInt_Check(obj)) {
+    if (val) *val = PyInt_AsLong(obj);
+    return SWIG_OK;
+  } else if (PyLong_Check(obj)) {
+    long v = PyLong_AsLong(obj);
+    if (!PyErr_Occurred()) {
+      if (val) *val = v;
+      return SWIG_OK;
+    } else {
+      PyErr_Clear();
+    }
+  }
+#ifdef SWIG_PYTHON_CAST_MODE
+  {
+    int dispatch = 0;
+    long v = PyInt_AsLong(obj);
+    if (!PyErr_Occurred()) {
+      if (val) *val = v;
+      return SWIG_AddCast(SWIG_OK);
+    } else {
+      PyErr_Clear();
+    }
+    if (!dispatch) {
+      double d;
+      int res = SWIG_AddCast(SWIG_AsVal_double (obj,&d));
+      if (SWIG_IsOK(res) && SWIG_CanCastAsInteger(&d, LONG_MIN, LONG_MAX)) {
+	if (val) *val = (long)(d);
+	return res;
+      }
+    }
+  }
+#endif
+  return SWIG_TypeError;
+}
+
+
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
+
+SWIGINTERN LinearTermPtr VarPtr___mul____SWIG_0(VarPtr *self,double w){
+      return *self * w;
+    }
+SWIGINTERN LinearTermPtr VarPtr___rmul____SWIG_0(VarPtr *self,double w){
+      return *self * w;
+    }
+SWIGINTERN LinearTermPtr VarPtr___mul____SWIG_1(VarPtr *self,vector< double > w){
+      return *self * w;
+    }
+SWIGINTERN LinearTermPtr VarPtr___rmul____SWIG_1(VarPtr *self,vector< double > w){
+      return *self * w;
+    }
+SWIGINTERN LinearTermPtr VarPtr___add__(VarPtr *self,VarPtr v){
+      return *self + v;
+    }
+SWIGINTERN LinearTermPtr VarPtr___div____SWIG_0(VarPtr *self,double w){
+      return *self / w;
+    }
+SWIGINTERN LinearTermPtr VarPtr___div____SWIG_1(VarPtr *self,FunctionPtr f){
+      return *self / f;
+    }
+SWIGINTERN LinearTermPtr VarPtr___sub____SWIG_0(VarPtr *self,VarPtr v){
+      return *self - v;
+    }
+SWIGINTERN LinearTermPtr VarPtr___sub____SWIG_1(VarPtr *self){
+      return - *self;
+    }
 #ifdef __cplusplus
 extern "C" {
 #endif
+SWIGINTERN PyObject *_wrap_Var_ID(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Var *arg1 = (Var *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Var_ID",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Var, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Var_ID" "', argument " "1"" of type '" "Var *""'"); 
+  }
+  arg1 = reinterpret_cast< Var * >(argp1);
+  result = (int)(arg1)->ID();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Var_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Var *arg1 = (Var *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::string *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Var_name",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Var, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Var_name" "', argument " "1"" of type '" "Var *""'"); 
+  }
+  arg1 = reinterpret_cast< Var * >(argp1);
+  result = (std::string *) &(arg1)->name();
+  resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Var_displayString(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Var *arg1 = (Var *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::string result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Var_displayString",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Var, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Var_displayString" "', argument " "1"" of type '" "Var *""'"); 
+  }
+  arg1 = reinterpret_cast< Var * >(argp1);
+  result = (arg1)->displayString();
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Var_rank(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Var *arg1 = (Var *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Var_rank",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Var, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Var_rank" "', argument " "1"" of type '" "Var *""'"); 
+  }
+  arg1 = reinterpret_cast< Var * >(argp1);
+  result = (int)(arg1)->rank();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Var_space(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Var *arg1 = (Var *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Camellia::Space result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Var_space",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Var, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Var_space" "', argument " "1"" of type '" "Var *""'"); 
+  }
+  arg1 = reinterpret_cast< Var * >(argp1);
+  result = (Camellia::Space)(arg1)->space();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Var_varType(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Var *arg1 = (Var *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Camellia::VarType result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Var_varType",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Var, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Var_varType" "', argument " "1"" of type '" "Var *""'"); 
+  }
+  arg1 = reinterpret_cast< Var * >(argp1);
+  result = (Camellia::VarType)(arg1)->varType();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Var_op(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Var *arg1 = (Var *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Camellia::EOperator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Var_op",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Var, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Var_op" "', argument " "1"" of type '" "Var *""'"); 
+  }
+  arg1 = reinterpret_cast< Var * >(argp1);
+  result = (Camellia::EOperator)(arg1)->op();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Var_termTraced(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Var *arg1 = (Var *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  LinearTermPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Var_termTraced",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Var, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Var_termTraced" "', argument " "1"" of type '" "Var *""'"); 
+  }
+  arg1 = reinterpret_cast< Var * >(argp1);
+  result = (arg1)->termTraced();
+  resultobj = SWIG_NewPointerObj((new LinearTermPtr(static_cast< const LinearTermPtr& >(result))), SWIGTYPE_p_LinearTermPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Var_grad(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Var *arg1 = (Var *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  VarPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Var_grad",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Var, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Var_grad" "', argument " "1"" of type '" "Var *""'"); 
+  }
+  arg1 = reinterpret_cast< Var * >(argp1);
+  result = (arg1)->grad();
+  resultobj = SWIG_NewPointerObj((new VarPtr(static_cast< const VarPtr& >(result))), SWIGTYPE_p_VarPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Var_div(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Var *arg1 = (Var *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  VarPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Var_div",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Var, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Var_div" "', argument " "1"" of type '" "Var *""'"); 
+  }
+  arg1 = reinterpret_cast< Var * >(argp1);
+  result = (arg1)->div();
+  resultobj = SWIG_NewPointerObj((new VarPtr(static_cast< const VarPtr& >(result))), SWIGTYPE_p_VarPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Var_curl(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Var *arg1 = (Var *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  VarPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Var_curl",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Var, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Var_curl" "', argument " "1"" of type '" "Var *""'"); 
+  }
+  arg1 = reinterpret_cast< Var * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Var_curl" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (arg1)->curl(arg2);
+  resultobj = SWIG_NewPointerObj((new VarPtr(static_cast< const VarPtr& >(result))), SWIGTYPE_p_VarPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Var_dx(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Var *arg1 = (Var *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  VarPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Var_dx",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Var, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Var_dx" "', argument " "1"" of type '" "Var *""'"); 
+  }
+  arg1 = reinterpret_cast< Var * >(argp1);
+  result = (arg1)->dx();
+  resultobj = SWIG_NewPointerObj((new VarPtr(static_cast< const VarPtr& >(result))), SWIGTYPE_p_VarPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Var_dy(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Var *arg1 = (Var *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  VarPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Var_dy",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Var, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Var_dy" "', argument " "1"" of type '" "Var *""'"); 
+  }
+  arg1 = reinterpret_cast< Var * >(argp1);
+  result = (arg1)->dy();
+  resultobj = SWIG_NewPointerObj((new VarPtr(static_cast< const VarPtr& >(result))), SWIGTYPE_p_VarPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Var_x(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Var *arg1 = (Var *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  VarPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Var_x",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Var, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Var_x" "', argument " "1"" of type '" "Var *""'"); 
+  }
+  arg1 = reinterpret_cast< Var * >(argp1);
+  result = (arg1)->x();
+  resultobj = SWIG_NewPointerObj((new VarPtr(static_cast< const VarPtr& >(result))), SWIGTYPE_p_VarPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Var_y(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Var *arg1 = (Var *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  VarPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Var_y",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Var, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Var_y" "', argument " "1"" of type '" "Var *""'"); 
+  }
+  arg1 = reinterpret_cast< Var * >(argp1);
+  result = (arg1)->y();
+  resultobj = SWIG_NewPointerObj((new VarPtr(static_cast< const VarPtr& >(result))), SWIGTYPE_p_VarPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_Var(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Var *arg1 = (Var *) 0 ;
@@ -3101,6 +3660,490 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_VarPtr___mul____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  LinearTermPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:VarPtr___mul__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr___mul__" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "VarPtr___mul__" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  result = VarPtr___mul____SWIG_0(arg1,arg2);
+  resultobj = SWIG_NewPointerObj((new LinearTermPtr(static_cast< const LinearTermPtr& >(result))), SWIGTYPE_p_LinearTermPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr___rmul____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  LinearTermPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:VarPtr___rmul__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr___rmul__" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "VarPtr___rmul__" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  result = VarPtr___rmul____SWIG_0(arg1,arg2);
+  resultobj = SWIG_NewPointerObj((new LinearTermPtr(static_cast< const LinearTermPtr& >(result))), SWIGTYPE_p_LinearTermPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr___mul____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  vector< double > arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  LinearTermPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:VarPtr___mul__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr___mul__" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_vectorT_double_t,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VarPtr___mul__" "', argument " "2"" of type '" "vector< double >""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VarPtr___mul__" "', argument " "2"" of type '" "vector< double >""'");
+    } else {
+      vector< double > * temp = reinterpret_cast< vector< double > * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  result = VarPtr___mul____SWIG_1(arg1,arg2);
+  resultobj = SWIG_NewPointerObj((new LinearTermPtr(static_cast< const LinearTermPtr& >(result))), SWIGTYPE_p_LinearTermPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr___mul__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_VarPtr, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_vectorT_double_t, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_VarPtr___mul____SWIG_1(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_VarPtr, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_VarPtr___mul____SWIG_0(self, args);
+      }
+    }
+  }
+  
+fail:
+  Py_INCREF(Py_NotImplemented);
+  return Py_NotImplemented;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr___rmul____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  vector< double > arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  LinearTermPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:VarPtr___rmul__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr___rmul__" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_vectorT_double_t,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VarPtr___rmul__" "', argument " "2"" of type '" "vector< double >""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VarPtr___rmul__" "', argument " "2"" of type '" "vector< double >""'");
+    } else {
+      vector< double > * temp = reinterpret_cast< vector< double > * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  result = VarPtr___rmul____SWIG_1(arg1,arg2);
+  resultobj = SWIG_NewPointerObj((new LinearTermPtr(static_cast< const LinearTermPtr& >(result))), SWIGTYPE_p_LinearTermPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr___rmul__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_VarPtr, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_vectorT_double_t, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_VarPtr___rmul____SWIG_1(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_VarPtr, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_VarPtr___rmul____SWIG_0(self, args);
+      }
+    }
+  }
+  
+fail:
+  Py_INCREF(Py_NotImplemented);
+  return Py_NotImplemented;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr___add__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  VarPtr arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  LinearTermPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:VarPtr___add__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr___add__" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_VarPtr,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VarPtr___add__" "', argument " "2"" of type '" "VarPtr""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VarPtr___add__" "', argument " "2"" of type '" "VarPtr""'");
+    } else {
+      VarPtr * temp = reinterpret_cast< VarPtr * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  result = VarPtr___add__(arg1,arg2);
+  resultobj = SWIG_NewPointerObj((new LinearTermPtr(static_cast< const LinearTermPtr& >(result))), SWIGTYPE_p_LinearTermPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr___div____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  LinearTermPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:VarPtr___div__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr___div__" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "VarPtr___div__" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  result = VarPtr___div____SWIG_0(arg1,arg2);
+  resultobj = SWIG_NewPointerObj((new LinearTermPtr(static_cast< const LinearTermPtr& >(result))), SWIGTYPE_p_LinearTermPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr___div____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  FunctionPtr arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  LinearTermPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:VarPtr___div__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr___div__" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_FunctionPtr,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VarPtr___div__" "', argument " "2"" of type '" "FunctionPtr""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VarPtr___div__" "', argument " "2"" of type '" "FunctionPtr""'");
+    } else {
+      FunctionPtr * temp = reinterpret_cast< FunctionPtr * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  result = VarPtr___div____SWIG_1(arg1,arg2);
+  resultobj = SWIG_NewPointerObj((new LinearTermPtr(static_cast< const LinearTermPtr& >(result))), SWIGTYPE_p_LinearTermPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr___div__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_VarPtr, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_FunctionPtr, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_VarPtr___div____SWIG_1(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_VarPtr, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_VarPtr___div____SWIG_0(self, args);
+      }
+    }
+  }
+  
+fail:
+  Py_INCREF(Py_NotImplemented);
+  return Py_NotImplemented;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr___sub____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  VarPtr arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  LinearTermPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:VarPtr___sub__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr___sub__" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  {
+    res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_VarPtr,  0  | 0);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VarPtr___sub__" "', argument " "2"" of type '" "VarPtr""'"); 
+    }  
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VarPtr___sub__" "', argument " "2"" of type '" "VarPtr""'");
+    } else {
+      VarPtr * temp = reinterpret_cast< VarPtr * >(argp2);
+      arg2 = *temp;
+      if (SWIG_IsNewObj(res2)) delete temp;
+    }
+  }
+  result = VarPtr___sub____SWIG_0(arg1,arg2);
+  resultobj = SWIG_NewPointerObj((new LinearTermPtr(static_cast< const LinearTermPtr& >(result))), SWIGTYPE_p_LinearTermPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr___sub____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  LinearTermPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarPtr___sub__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr___sub__" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  result = VarPtr___sub____SWIG_1(arg1);
+  resultobj = SWIG_NewPointerObj((new LinearTermPtr(static_cast< const LinearTermPtr& >(result))), SWIGTYPE_p_LinearTermPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr___sub__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_VarPtr, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_VarPtr___sub____SWIG_1(self, args);
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_VarPtr, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_VarPtr, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_VarPtr___sub____SWIG_0(self, args);
+      }
+    }
+  }
+  
+fail:
+  Py_INCREF(Py_NotImplemented);
+  return Py_NotImplemented;
+}
+
+
 SWIGINTERN PyObject *_wrap_new_VarPtr(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   VarPtr *result = 0 ;
@@ -3135,6 +4178,345 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_VarPtr_ID(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarPtr_ID",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr_ID" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  result = (int)(*arg1)->ID();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::string *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarPtr_name",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr_name" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  result = (std::string *) &(*arg1)->name();
+  resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr_displayString(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::string result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarPtr_displayString",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr_displayString" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  result = (*arg1)->displayString();
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr_rank(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarPtr_rank",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr_rank" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  result = (int)(*arg1)->rank();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr_space(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Camellia::Space result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarPtr_space",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr_space" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  result = (Camellia::Space)(*arg1)->space();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr_varType(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Camellia::VarType result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarPtr_varType",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr_varType" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  result = (Camellia::VarType)(*arg1)->varType();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr_op(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Camellia::EOperator result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarPtr_op",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr_op" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  result = (Camellia::EOperator)(*arg1)->op();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr_termTraced(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  LinearTermPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarPtr_termTraced",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr_termTraced" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  result = (*arg1)->termTraced();
+  resultobj = SWIG_NewPointerObj((new LinearTermPtr(static_cast< const LinearTermPtr& >(result))), SWIGTYPE_p_LinearTermPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr_grad(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  VarPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarPtr_grad",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr_grad" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  result = (*arg1)->grad();
+  resultobj = SWIG_NewPointerObj((new VarPtr(static_cast< const VarPtr& >(result))), SWIGTYPE_p_VarPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr_div(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  VarPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarPtr_div",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr_div" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  result = (*arg1)->div();
+  resultobj = SWIG_NewPointerObj((new VarPtr(static_cast< const VarPtr& >(result))), SWIGTYPE_p_VarPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr_curl(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  VarPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:VarPtr_curl",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr_curl" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "VarPtr_curl" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (*arg1)->curl(arg2);
+  resultobj = SWIG_NewPointerObj((new VarPtr(static_cast< const VarPtr& >(result))), SWIGTYPE_p_VarPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr_dx(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  VarPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarPtr_dx",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr_dx" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  result = (*arg1)->dx();
+  resultobj = SWIG_NewPointerObj((new VarPtr(static_cast< const VarPtr& >(result))), SWIGTYPE_p_VarPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr_dy(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  VarPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarPtr_dy",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr_dy" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  result = (*arg1)->dy();
+  resultobj = SWIG_NewPointerObj((new VarPtr(static_cast< const VarPtr& >(result))), SWIGTYPE_p_VarPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr_x(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  VarPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarPtr_x",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr_x" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  result = (*arg1)->x();
+  resultobj = SWIG_NewPointerObj((new VarPtr(static_cast< const VarPtr& >(result))), SWIGTYPE_p_VarPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarPtr_y(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarPtr *arg1 = (VarPtr *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  VarPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarPtr_y",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarPtr, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarPtr_y" "', argument " "1"" of type '" "VarPtr *""'"); 
+  }
+  arg1 = reinterpret_cast< VarPtr * >(argp1);
+  result = (*arg1)->y();
+  resultobj = SWIG_NewPointerObj((new VarPtr(static_cast< const VarPtr& >(result))), SWIGTYPE_p_VarPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *VarPtr_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
@@ -3144,11 +4526,46 @@ SWIGINTERN PyObject *VarPtr_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObjec
 
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
+	 { (char *)"Var_ID", _wrap_Var_ID, METH_VARARGS, NULL},
+	 { (char *)"Var_name", _wrap_Var_name, METH_VARARGS, NULL},
+	 { (char *)"Var_displayString", _wrap_Var_displayString, METH_VARARGS, NULL},
+	 { (char *)"Var_rank", _wrap_Var_rank, METH_VARARGS, NULL},
+	 { (char *)"Var_space", _wrap_Var_space, METH_VARARGS, NULL},
+	 { (char *)"Var_varType", _wrap_Var_varType, METH_VARARGS, NULL},
+	 { (char *)"Var_op", _wrap_Var_op, METH_VARARGS, NULL},
+	 { (char *)"Var_termTraced", _wrap_Var_termTraced, METH_VARARGS, NULL},
+	 { (char *)"Var_grad", _wrap_Var_grad, METH_VARARGS, NULL},
+	 { (char *)"Var_div", _wrap_Var_div, METH_VARARGS, NULL},
+	 { (char *)"Var_curl", _wrap_Var_curl, METH_VARARGS, NULL},
+	 { (char *)"Var_dx", _wrap_Var_dx, METH_VARARGS, NULL},
+	 { (char *)"Var_dy", _wrap_Var_dy, METH_VARARGS, NULL},
+	 { (char *)"Var_x", _wrap_Var_x, METH_VARARGS, NULL},
+	 { (char *)"Var_y", _wrap_Var_y, METH_VARARGS, NULL},
 	 { (char *)"delete_Var", _wrap_delete_Var, METH_VARARGS, NULL},
 	 { (char *)"Var_swigregister", Var_swigregister, METH_VARARGS, NULL},
 	 { (char *)"VarPtr___deref__", _wrap_VarPtr___deref__, METH_VARARGS, NULL},
+	 { (char *)"VarPtr___mul__", _wrap_VarPtr___mul__, METH_VARARGS, NULL},
+	 { (char *)"VarPtr___rmul__", _wrap_VarPtr___rmul__, METH_VARARGS, NULL},
+	 { (char *)"VarPtr___add__", _wrap_VarPtr___add__, METH_VARARGS, NULL},
+	 { (char *)"VarPtr___div__", _wrap_VarPtr___div__, METH_VARARGS, NULL},
+	 { (char *)"VarPtr___sub__", _wrap_VarPtr___sub__, METH_VARARGS, NULL},
 	 { (char *)"new_VarPtr", _wrap_new_VarPtr, METH_VARARGS, NULL},
 	 { (char *)"delete_VarPtr", _wrap_delete_VarPtr, METH_VARARGS, NULL},
+	 { (char *)"VarPtr_ID", _wrap_VarPtr_ID, METH_VARARGS, NULL},
+	 { (char *)"VarPtr_name", _wrap_VarPtr_name, METH_VARARGS, NULL},
+	 { (char *)"VarPtr_displayString", _wrap_VarPtr_displayString, METH_VARARGS, NULL},
+	 { (char *)"VarPtr_rank", _wrap_VarPtr_rank, METH_VARARGS, NULL},
+	 { (char *)"VarPtr_space", _wrap_VarPtr_space, METH_VARARGS, NULL},
+	 { (char *)"VarPtr_varType", _wrap_VarPtr_varType, METH_VARARGS, NULL},
+	 { (char *)"VarPtr_op", _wrap_VarPtr_op, METH_VARARGS, NULL},
+	 { (char *)"VarPtr_termTraced", _wrap_VarPtr_termTraced, METH_VARARGS, NULL},
+	 { (char *)"VarPtr_grad", _wrap_VarPtr_grad, METH_VARARGS, NULL},
+	 { (char *)"VarPtr_div", _wrap_VarPtr_div, METH_VARARGS, NULL},
+	 { (char *)"VarPtr_curl", _wrap_VarPtr_curl, METH_VARARGS, NULL},
+	 { (char *)"VarPtr_dx", _wrap_VarPtr_dx, METH_VARARGS, NULL},
+	 { (char *)"VarPtr_dy", _wrap_VarPtr_dy, METH_VARARGS, NULL},
+	 { (char *)"VarPtr_x", _wrap_VarPtr_x, METH_VARARGS, NULL},
+	 { (char *)"VarPtr_y", _wrap_VarPtr_y, METH_VARARGS, NULL},
 	 { (char *)"VarPtr_swigregister", VarPtr_swigregister, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
@@ -3156,24 +4573,36 @@ static PyMethodDef SwigMethods[] = {
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
+static swig_type_info _swigt__p_FunctionPtr = {"_p_FunctionPtr", "FunctionPtr *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_LinearTermPtr = {"_p_LinearTermPtr", "LinearTermPtr *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_Var = {"_p_Var", "Var *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_VarPtr = {"_p_VarPtr", "VarPtr *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_vectorT_double_t = {"_p_vectorT_double_t", "vector< double > *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
+  &_swigt__p_FunctionPtr,
+  &_swigt__p_LinearTermPtr,
   &_swigt__p_Var,
   &_swigt__p_VarPtr,
   &_swigt__p_char,
+  &_swigt__p_vectorT_double_t,
 };
 
+static swig_cast_info _swigc__p_FunctionPtr[] = {  {&_swigt__p_FunctionPtr, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_LinearTermPtr[] = {  {&_swigt__p_LinearTermPtr, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_Var[] = {  {&_swigt__p_Var, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_VarPtr[] = {  {&_swigt__p_VarPtr, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_vectorT_double_t[] = {  {&_swigt__p_vectorT_double_t, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
+  _swigc__p_FunctionPtr,
+  _swigc__p_LinearTermPtr,
   _swigc__p_Var,
   _swigc__p_VarPtr,
   _swigc__p_char,
+  _swigc__p_vectorT_double_t,
 };
 
 
@@ -3871,6 +5300,40 @@ SWIG_init(void) {
   SWIG_Python_SetConstant(d, "VECTOR_HGRAD_DISC",SWIG_From_int(static_cast< int >(Camellia::VECTOR_HGRAD_DISC)));
   SWIG_Python_SetConstant(d, "VECTOR_L2",SWIG_From_int(static_cast< int >(Camellia::VECTOR_L2)));
   SWIG_Python_SetConstant(d, "UNKNOWN_FS",SWIG_From_int(static_cast< int >(Camellia::UNKNOWN_FS)));
+  SWIG_Python_SetConstant(d, "OP_VALUE",SWIG_From_int(static_cast< int >(Camellia::OP_VALUE)));
+  SWIG_Python_SetConstant(d, "OP_GRAD",SWIG_From_int(static_cast< int >(Camellia::OP_GRAD)));
+  SWIG_Python_SetConstant(d, "OP_CURL",SWIG_From_int(static_cast< int >(Camellia::OP_CURL)));
+  SWIG_Python_SetConstant(d, "OP_DIV",SWIG_From_int(static_cast< int >(Camellia::OP_DIV)));
+  SWIG_Python_SetConstant(d, "OP_D1",SWIG_From_int(static_cast< int >(Camellia::OP_D1)));
+  SWIG_Python_SetConstant(d, "OP_D2",SWIG_From_int(static_cast< int >(Camellia::OP_D2)));
+  SWIG_Python_SetConstant(d, "OP_D3",SWIG_From_int(static_cast< int >(Camellia::OP_D3)));
+  SWIG_Python_SetConstant(d, "OP_D4",SWIG_From_int(static_cast< int >(Camellia::OP_D4)));
+  SWIG_Python_SetConstant(d, "OP_D5",SWIG_From_int(static_cast< int >(Camellia::OP_D5)));
+  SWIG_Python_SetConstant(d, "OP_D6",SWIG_From_int(static_cast< int >(Camellia::OP_D6)));
+  SWIG_Python_SetConstant(d, "OP_D7",SWIG_From_int(static_cast< int >(Camellia::OP_D7)));
+  SWIG_Python_SetConstant(d, "OP_D8",SWIG_From_int(static_cast< int >(Camellia::OP_D8)));
+  SWIG_Python_SetConstant(d, "OP_D9",SWIG_From_int(static_cast< int >(Camellia::OP_D9)));
+  SWIG_Python_SetConstant(d, "OP_D10",SWIG_From_int(static_cast< int >(Camellia::OP_D10)));
+  SWIG_Python_SetConstant(d, "OP_X",SWIG_From_int(static_cast< int >(Camellia::OP_X)));
+  SWIG_Python_SetConstant(d, "OP_Y",SWIG_From_int(static_cast< int >(Camellia::OP_Y)));
+  SWIG_Python_SetConstant(d, "OP_Z",SWIG_From_int(static_cast< int >(Camellia::OP_Z)));
+  SWIG_Python_SetConstant(d, "OP_DX",SWIG_From_int(static_cast< int >(Camellia::OP_DX)));
+  SWIG_Python_SetConstant(d, "OP_DY",SWIG_From_int(static_cast< int >(Camellia::OP_DY)));
+  SWIG_Python_SetConstant(d, "OP_DZ",SWIG_From_int(static_cast< int >(Camellia::OP_DZ)));
+  SWIG_Python_SetConstant(d, "OP_CROSS_NORMAL",SWIG_From_int(static_cast< int >(Camellia::OP_CROSS_NORMAL)));
+  SWIG_Python_SetConstant(d, "OP_DOT_NORMAL",SWIG_From_int(static_cast< int >(Camellia::OP_DOT_NORMAL)));
+  SWIG_Python_SetConstant(d, "OP_TIMES_NORMAL",SWIG_From_int(static_cast< int >(Camellia::OP_TIMES_NORMAL)));
+  SWIG_Python_SetConstant(d, "OP_TIMES_NORMAL_X",SWIG_From_int(static_cast< int >(Camellia::OP_TIMES_NORMAL_X)));
+  SWIG_Python_SetConstant(d, "OP_TIMES_NORMAL_Y",SWIG_From_int(static_cast< int >(Camellia::OP_TIMES_NORMAL_Y)));
+  SWIG_Python_SetConstant(d, "OP_TIMES_NORMAL_Z",SWIG_From_int(static_cast< int >(Camellia::OP_TIMES_NORMAL_Z)));
+  SWIG_Python_SetConstant(d, "OP_TIMES_NORMAL_T",SWIG_From_int(static_cast< int >(Camellia::OP_TIMES_NORMAL_T)));
+  SWIG_Python_SetConstant(d, "OP_VECTORIZE_VALUE",SWIG_From_int(static_cast< int >(Camellia::OP_VECTORIZE_VALUE)));
+  SWIG_Python_SetConstant(d, "TEST",SWIG_From_int(static_cast< int >(Camellia::TEST)));
+  SWIG_Python_SetConstant(d, "FIELD",SWIG_From_int(static_cast< int >(Camellia::FIELD)));
+  SWIG_Python_SetConstant(d, "TRACE",SWIG_From_int(static_cast< int >(Camellia::TRACE)));
+  SWIG_Python_SetConstant(d, "FLUX",SWIG_From_int(static_cast< int >(Camellia::FLUX)));
+  SWIG_Python_SetConstant(d, "UNKNOWN_TYPE",SWIG_From_int(static_cast< int >(Camellia::UNKNOWN_TYPE)));
+  SWIG_Python_SetConstant(d, "MIXED_TYPE",SWIG_From_int(static_cast< int >(Camellia::MIXED_TYPE)));
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

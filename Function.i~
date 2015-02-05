@@ -1,6 +1,7 @@
 %module Function
 %{
 #include "Function.h"
+#include "Mesh.h"
 %}
 
 %include "std_string.i"
@@ -9,23 +10,23 @@
 
 class Function {
 public:
-  virtual string displayString();
+  string displayString();
   double evaluate(double x);
   double evaluate(double x, double y);
   double evaluate(double x, double y, double z);
   
-  FunctionPtr x(); 
-  FunctionPtr y();
+  virtual FunctionPtr x(); 
+  virtual FunctionPtr y();
 
   // member functions for taking derivatives:
-  FunctionPtr dx();
-  FunctionPtr dy();
+  virtual FunctionPtr dx();
+  virtual FunctionPtr dy();
   
-  FunctionPtr div();
-  FunctionPtr grad();
+  virtual FunctionPtr div();
+  virtual FunctionPtr grad();
 
-  rank();
-  double 12norm(MeshPtr mesh, int cubatureDegreeEnrichment = 0);
+  int rank();
+  double l2norm(MeshPtr mesh, int cubatureDegreeEnrichment = 0);
   
   // static methods:
   static double evaluate(FunctionPtr f, double x, double y); 
@@ -68,19 +69,19 @@ public:
       return *self * value;
     }
     FunctionPtr __mul__(vector<double> weight) {
-      return *self * weight;
+      return *self *  weight;
     }
     FunctionPtr __rmul__(vector<double> weight) {
       return *self * weight;
     }
     FunctionPtr __div__(FunctionPtr scalarDivision) {
-      return *self / *scalarDivision;
+      return *self / scalarDivision;
     }
     FunctionPtr __div__(double divisor) {
-      return *self / * divisor;
+      return *self / divisor;
     }
-    Function __rdiv__(double divisor) {
-      return *divisor / *self;
+    FunctionPtr __rdiv__(double divisor) {
+      return divisor / *self;
     }
     FunctionPtr __sub__(FunctionPtr f2) {
       return *self - f2;
@@ -95,12 +96,12 @@ public:
       return - *self;
     }
 
-    LinearTermPtr __mul__(VarPtr) {
-      return *self * VarPtr:
+    LinearTermPtr __mul__(VarPtr v) {
+      return *self * v;
     }
 
-    LinearTermPtr __rmul__(VarPtr) {
-      return *self * VarPtr:
+    LinearTermPtr __rmul__(VarPtr v) {
+      return *self * v;
     }
 
   }

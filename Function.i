@@ -10,20 +10,20 @@
 
 class Function {
 public:
-  virtual string displayString();
+  string displayString();
   double evaluate(double x);
   double evaluate(double x, double y);
   double evaluate(double x, double y, double z);
   
-  FunctionPtr x(); 
-  FunctionPtr y();
+  virtual FunctionPtr x(); 
+  virtual FunctionPtr y();
 
   // member functions for taking derivatives:
-  FunctionPtr dx();
-  FunctionPtr dy();
+  virtual FunctionPtr dx();
+  virtual FunctionPtr dy();
   
-  FunctionPtr div();
-  FunctionPtr grad();
+  virtual FunctionPtr div();
+  virtual FunctionPtr grad();
 
   int rank();
   double l2norm(MeshPtr mesh, int cubatureDegreeEnrichment = 0);
@@ -34,6 +34,7 @@ public:
   static FunctionPtr xn(int n=1); // NOTE: important to have "FunctionPtr" here exactly as below; "Teuchos::RCP<Function>", though equivalent in C++, is not equivalent for SWIG
   static FunctionPtr yn(int n=1);
   static FunctionPtr composedFunction( FunctionPtr f, FunctionPtr arg_g);
+  static FunctionPtr constant(double value);
   static FunctionPtr vectorize(FunctionPtr f1, FunctionPtr f2);
   static FunctionPtr normal();
   static FunctionPtr solution(VarPtr var, SolutionPtr soln);
