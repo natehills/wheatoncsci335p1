@@ -93,6 +93,8 @@ class Function(_object):
     if _newclass:yn = staticmethod(_Function.Function_yn)
     __swig_getmethods__["composedFunction"] = lambda x: _Function.Function_composedFunction
     if _newclass:composedFunction = staticmethod(_Function.Function_composedFunction)
+    __swig_getmethods__["constant"] = lambda x: _Function.Function_constant
+    if _newclass:constant = staticmethod(_Function.Function_constant)
     __swig_getmethods__["vectorize"] = lambda x: _Function.Function_vectorize
     if _newclass:vectorize = staticmethod(_Function.Function_vectorize)
     __swig_getmethods__["normal"] = lambda x: _Function.Function_normal
@@ -120,6 +122,10 @@ Function_yn = _Function.Function_yn
 def Function_composedFunction(*args):
   return _Function.Function_composedFunction(*args)
 Function_composedFunction = _Function.Function_composedFunction
+
+def Function_constant(*args):
+  return _Function.Function_constant(*args)
+Function_constant = _Function.Function_constant
 
 def Function_vectorize(*args):
   return _Function.Function_vectorize(*args)
@@ -167,6 +173,7 @@ class FunctionPtr(_object):
     def xn(self, n=1): return _Function.FunctionPtr_xn(self, n)
     def yn(self, n=1): return _Function.FunctionPtr_yn(self, n)
     def composedFunction(self, *args): return _Function.FunctionPtr_composedFunction(self, *args)
+    def constant(self, *args): return _Function.FunctionPtr_constant(self, *args)
     def vectorize(self, *args): return _Function.FunctionPtr_vectorize(self, *args)
     def normal(self): return _Function.FunctionPtr_normal(self)
     def solution(self, *args): return _Function.FunctionPtr_solution(self, *args)

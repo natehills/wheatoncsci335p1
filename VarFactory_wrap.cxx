@@ -2939,8 +2939,10 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 #define SWIGTYPE_p_VarFactory swig_types[2]
 #define SWIGTYPE_p_VarPtr swig_types[3]
 #define SWIGTYPE_p_char swig_types[4]
-static swig_type_info *swig_types[6];
-static swig_module_info swig_module = {swig_types, 5, 0, 0, 0, 0};
+#define SWIGTYPE_p_std__vectorT_VarPtr_t swig_types[5]
+#define SWIGTYPE_p_std__vectorT_int_t swig_types[6]
+static swig_type_info *swig_types[8];
+static swig_module_info swig_module = {swig_types, 7, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -4855,6 +4857,178 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_VarFactory_test(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarFactory *arg1 = (VarFactory *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  VarPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:VarFactory_test",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarFactory, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarFactory_test" "', argument " "1"" of type '" "VarFactory *""'"); 
+  }
+  arg1 = reinterpret_cast< VarFactory * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "VarFactory_test" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (arg1)->test(arg2);
+  resultobj = SWIG_NewPointerObj((new VarPtr(static_cast< const VarPtr& >(result))), SWIGTYPE_p_VarPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarFactory_trial(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarFactory *arg1 = (VarFactory *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  VarPtr result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:VarFactory_trial",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarFactory, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarFactory_trial" "', argument " "1"" of type '" "VarFactory *""'"); 
+  }
+  arg1 = reinterpret_cast< VarFactory * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "VarFactory_trial" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  result = (arg1)->trial(arg2);
+  resultobj = SWIG_NewPointerObj((new VarPtr(static_cast< const VarPtr& >(result))), SWIGTYPE_p_VarPtr, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarFactory_testIDs(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarFactory *arg1 = (VarFactory *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< int > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarFactory_testIDs",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarFactory, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarFactory_testIDs" "', argument " "1"" of type '" "VarFactory *""'"); 
+  }
+  arg1 = reinterpret_cast< VarFactory * >(argp1);
+  result = (arg1)->testIDs();
+  resultobj = SWIG_NewPointerObj((new std::vector< int >(static_cast< const std::vector< int >& >(result))), SWIGTYPE_p_std__vectorT_int_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarFactory_trialIDs(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarFactory *arg1 = (VarFactory *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< int > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarFactory_trialIDs",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarFactory, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarFactory_trialIDs" "', argument " "1"" of type '" "VarFactory *""'"); 
+  }
+  arg1 = reinterpret_cast< VarFactory * >(argp1);
+  result = (arg1)->trialIDs();
+  resultobj = SWIG_NewPointerObj((new std::vector< int >(static_cast< const std::vector< int >& >(result))), SWIGTYPE_p_std__vectorT_int_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarFactory_fieldVars(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarFactory *arg1 = (VarFactory *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< VarPtr > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarFactory_fieldVars",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarFactory, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarFactory_fieldVars" "', argument " "1"" of type '" "VarFactory *""'"); 
+  }
+  arg1 = reinterpret_cast< VarFactory * >(argp1);
+  result = (arg1)->fieldVars();
+  resultobj = SWIG_NewPointerObj((new std::vector< VarPtr >(static_cast< const std::vector< VarPtr >& >(result))), SWIGTYPE_p_std__vectorT_VarPtr_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarFactory_fluxVars(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarFactory *arg1 = (VarFactory *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< VarPtr > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarFactory_fluxVars",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarFactory, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarFactory_fluxVars" "', argument " "1"" of type '" "VarFactory *""'"); 
+  }
+  arg1 = reinterpret_cast< VarFactory * >(argp1);
+  result = (arg1)->fluxVars();
+  resultobj = SWIG_NewPointerObj((new std::vector< VarPtr >(static_cast< const std::vector< VarPtr >& >(result))), SWIGTYPE_p_std__vectorT_VarPtr_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VarFactory_traceVars(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  VarFactory *arg1 = (VarFactory *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::vector< VarPtr > result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:VarFactory_traceVars",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_VarFactory, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VarFactory_traceVars" "', argument " "1"" of type '" "VarFactory *""'"); 
+  }
+  arg1 = reinterpret_cast< VarFactory * >(argp1);
+  result = (arg1)->traceVars();
+  resultobj = SWIG_NewPointerObj((new std::vector< VarPtr >(static_cast< const std::vector< VarPtr >& >(result))), SWIGTYPE_p_std__vectorT_VarPtr_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_VarFactory_testVar__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   VarFactory *arg1 = (VarFactory *) 0 ;
@@ -6010,6 +6184,13 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"new_VarFactory", _wrap_new_VarFactory, METH_VARARGS, NULL},
 	 { (char *)"VarFactory_fluxVar", _wrap_VarFactory_fluxVar, METH_VARARGS, NULL},
+	 { (char *)"VarFactory_test", _wrap_VarFactory_test, METH_VARARGS, NULL},
+	 { (char *)"VarFactory_trial", _wrap_VarFactory_trial, METH_VARARGS, NULL},
+	 { (char *)"VarFactory_testIDs", _wrap_VarFactory_testIDs, METH_VARARGS, NULL},
+	 { (char *)"VarFactory_trialIDs", _wrap_VarFactory_trialIDs, METH_VARARGS, NULL},
+	 { (char *)"VarFactory_fieldVars", _wrap_VarFactory_fieldVars, METH_VARARGS, NULL},
+	 { (char *)"VarFactory_fluxVars", _wrap_VarFactory_fluxVars, METH_VARARGS, NULL},
+	 { (char *)"VarFactory_traceVars", _wrap_VarFactory_traceVars, METH_VARARGS, NULL},
 	 { (char *)"VarFactory_testVar", _wrap_VarFactory_testVar, METH_VARARGS, NULL},
 	 { (char *)"VarFactory_fieldVar", _wrap_VarFactory_fieldVar, METH_VARARGS, NULL},
 	 { (char *)"VarFactory_traceVar", _wrap_VarFactory_traceVar, METH_VARARGS, NULL},
@@ -6026,6 +6207,8 @@ static swig_type_info _swigt__p_Space = {"_p_Space", "Space *", 0, 0, (void*)0, 
 static swig_type_info _swigt__p_VarFactory = {"_p_VarFactory", "VarFactory *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_VarPtr = {"_p_VarPtr", "VarPtr *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_VarPtr_t = {"_p_std__vectorT_VarPtr_t", "std::vector< VarPtr > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_int_t = {"_p_std__vectorT_int_t", "std::vector< int > *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_LinearTermPtr,
@@ -6033,6 +6216,8 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_VarFactory,
   &_swigt__p_VarPtr,
   &_swigt__p_char,
+  &_swigt__p_std__vectorT_VarPtr_t,
+  &_swigt__p_std__vectorT_int_t,
 };
 
 static swig_cast_info _swigc__p_LinearTermPtr[] = {  {&_swigt__p_LinearTermPtr, 0, 0, 0},{0, 0, 0, 0}};
@@ -6040,6 +6225,8 @@ static swig_cast_info _swigc__p_Space[] = {  {&_swigt__p_Space, 0, 0, 0},{0, 0, 
 static swig_cast_info _swigc__p_VarFactory[] = {  {&_swigt__p_VarFactory, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_VarPtr[] = {  {&_swigt__p_VarPtr, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT_VarPtr_t[] = {  {&_swigt__p_std__vectorT_VarPtr_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT_int_t[] = {  {&_swigt__p_std__vectorT_int_t, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_LinearTermPtr,
@@ -6047,6 +6234,8 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_VarFactory,
   _swigc__p_VarPtr,
   _swigc__p_char,
+  _swigc__p_std__vectorT_VarPtr_t,
+  _swigc__p_std__vectorT_int_t,
 };
 
 
