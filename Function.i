@@ -69,6 +69,9 @@ public:
     FunctionPtr __rmul__(double value) {
       return *self * value;
     }
+    FunctionPtr __mul__(FunctionPtr f2) {
+      return *self *  f2;
+    }
     FunctionPtr __mul__(vector<double> weight) {
       return *self *  weight;
     }
