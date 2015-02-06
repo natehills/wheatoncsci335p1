@@ -10,7 +10,7 @@
 
 class Function {
 public:
-  string displayString();
+  std::string displayString();
   double evaluate(double x);
   double evaluate(double x, double y);
   double evaluate(double x, double y, double z);
@@ -96,7 +96,7 @@ public:
     FunctionPtr __rsub__(double value) {
       return value - *self;
     }
-    FunctionPtr __sub__() {
+    FunctionPtr __neg__() {
       return - *self;
     }
 
