@@ -69,6 +69,84 @@ except AttributeError:
     _newclass = 0
 
 
+class SwigPyIterator(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, SwigPyIterator, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, SwigPyIterator, name)
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
+    __swig_destroy__ = _IP.delete_SwigPyIterator
+    __del__ = lambda self : None;
+    def value(self): return _IP.SwigPyIterator_value(self)
+    def incr(self, n=1): return _IP.SwigPyIterator_incr(self, n)
+    def decr(self, n=1): return _IP.SwigPyIterator_decr(self, n)
+    def distance(self, *args): return _IP.SwigPyIterator_distance(self, *args)
+    def equal(self, *args): return _IP.SwigPyIterator_equal(self, *args)
+    def copy(self): return _IP.SwigPyIterator_copy(self)
+    def next(self): return _IP.SwigPyIterator_next(self)
+    def __next__(self): return _IP.SwigPyIterator___next__(self)
+    def previous(self): return _IP.SwigPyIterator_previous(self)
+    def advance(self, *args): return _IP.SwigPyIterator_advance(self, *args)
+    def __eq__(self, *args): return _IP.SwigPyIterator___eq__(self, *args)
+    def __ne__(self, *args): return _IP.SwigPyIterator___ne__(self, *args)
+    def __iadd__(self, *args): return _IP.SwigPyIterator___iadd__(self, *args)
+    def __isub__(self, *args): return _IP.SwigPyIterator___isub__(self, *args)
+    def __add__(self, *args): return _IP.SwigPyIterator___add__(self, *args)
+    def __sub__(self, *args): return _IP.SwigPyIterator___sub__(self, *args)
+    def __iter__(self): return self
+SwigPyIterator_swigregister = _IP.SwigPyIterator_swigregister
+SwigPyIterator_swigregister(SwigPyIterator)
+
+class map_int_FunctionPtr(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, map_int_FunctionPtr, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, map_int_FunctionPtr, name)
+    __repr__ = _swig_repr
+    def iterator(self): return _IP.map_int_FunctionPtr_iterator(self)
+    def __iter__(self): return self.iterator()
+    def __nonzero__(self): return _IP.map_int_FunctionPtr___nonzero__(self)
+    def __bool__(self): return _IP.map_int_FunctionPtr___bool__(self)
+    def __len__(self): return _IP.map_int_FunctionPtr___len__(self)
+    def __iter__(self): return self.key_iterator()
+    def iterkeys(self): return self.key_iterator()
+    def itervalues(self): return self.value_iterator()
+    def iteritems(self): return self.iterator()
+    def __getitem__(self, *args): return _IP.map_int_FunctionPtr___getitem__(self, *args)
+    def __delitem__(self, *args): return _IP.map_int_FunctionPtr___delitem__(self, *args)
+    def has_key(self, *args): return _IP.map_int_FunctionPtr_has_key(self, *args)
+    def keys(self): return _IP.map_int_FunctionPtr_keys(self)
+    def values(self): return _IP.map_int_FunctionPtr_values(self)
+    def items(self): return _IP.map_int_FunctionPtr_items(self)
+    def __contains__(self, *args): return _IP.map_int_FunctionPtr___contains__(self, *args)
+    def key_iterator(self): return _IP.map_int_FunctionPtr_key_iterator(self)
+    def value_iterator(self): return _IP.map_int_FunctionPtr_value_iterator(self)
+    def __setitem__(self, *args): return _IP.map_int_FunctionPtr___setitem__(self, *args)
+    def asdict(self): return _IP.map_int_FunctionPtr_asdict(self)
+    def __init__(self, *args): 
+        this = _IP.new_map_int_FunctionPtr(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def empty(self): return _IP.map_int_FunctionPtr_empty(self)
+    def size(self): return _IP.map_int_FunctionPtr_size(self)
+    def clear(self): return _IP.map_int_FunctionPtr_clear(self)
+    def swap(self, *args): return _IP.map_int_FunctionPtr_swap(self, *args)
+    def get_allocator(self): return _IP.map_int_FunctionPtr_get_allocator(self)
+    def begin(self): return _IP.map_int_FunctionPtr_begin(self)
+    def end(self): return _IP.map_int_FunctionPtr_end(self)
+    def rbegin(self): return _IP.map_int_FunctionPtr_rbegin(self)
+    def rend(self): return _IP.map_int_FunctionPtr_rend(self)
+    def count(self, *args): return _IP.map_int_FunctionPtr_count(self, *args)
+    def erase(self, *args): return _IP.map_int_FunctionPtr_erase(self, *args)
+    def find(self, *args): return _IP.map_int_FunctionPtr_find(self, *args)
+    def lower_bound(self, *args): return _IP.map_int_FunctionPtr_lower_bound(self, *args)
+    def upper_bound(self, *args): return _IP.map_int_FunctionPtr_upper_bound(self, *args)
+    __swig_destroy__ = _IP.delete_map_int_FunctionPtr
+    __del__ = lambda self : None;
+map_int_FunctionPtr_swigregister = _IP.map_int_FunctionPtr_swigregister
+map_int_FunctionPtr_swigregister(map_int_FunctionPtr)
+
 class IP(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, IP, name, value)
