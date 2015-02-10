@@ -8,6 +8,7 @@
 %}
 
 %include "std_map.i"
+%include "std_string.i"
 
 namespace std {
 %template(map_int_FunctionPtr) map<int, FunctionPtr>;
@@ -23,4 +24,9 @@ public:
   void addTerm(LinearTermPtr a);
   void addTerm(VarPtr v);
   LinearTermPtr evaluate(std::map< int,FunctionPtr> &varFunctions);
+};
+
+class IPPtr {
+public:
+  IP* operator->();
 };
