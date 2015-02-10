@@ -150,8 +150,9 @@ class FunctionPtr(_object):
     def __radd__(self, *args): return _Function.FunctionPtr___radd__(self, *args)
     def __div__(self, *args): return _Function.FunctionPtr___div__(self, *args)
     def __rdiv__(self, *args): return _Function.FunctionPtr___rdiv__(self, *args)
-    def __rsub__(self, *args): return _Function.FunctionPtr___rsub__(self, *args)
     def __sub__(self, *args): return _Function.FunctionPtr___sub__(self, *args)
+    def __rsub__(self, *args): return _Function.FunctionPtr___rsub__(self, *args)
+    def __neg__(self): return _Function.FunctionPtr___neg__(self)
     def __mul__(self, *args): return _Function.FunctionPtr___mul__(self, *args)
     def __rmul__(self, *args): return _Function.FunctionPtr___rmul__(self, *args)
     def __init__(self): 

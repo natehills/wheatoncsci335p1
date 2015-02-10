@@ -1,7 +1,20 @@
 %module IP
+
+
+
 %{
 #include "IP.h"
+#include "Function.h"
 %}
+
+%include "std_map.i"
+
+namespace std {
+%template(map_int_FunctionPtr) map<int, FunctionPtr>;
+}
+
+ 
+
 
 
 class IP{
@@ -9,5 +22,5 @@ public:
   IP();
   void addTerm(LinearTermPtr a);
   void addTerm(VarPtr v);
-  LinearTermPtr evaluate(map< int, FunctionPtr> &varFunctions);
+  LinearTermPtr evaluate(std::map< int,FunctionPtr> &varFunctions);
 };
