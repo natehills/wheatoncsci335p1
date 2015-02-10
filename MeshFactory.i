@@ -7,11 +7,16 @@
 %include "std_set.i"
 %include "std_vector.i"
 
+namespace std {
+  %template(IntVector) vector<int>;
+  %template(DoubleVector) vector<double>;
+ }
+
 %nodefaultctor MeshFactory; // Disable default constructor
 
 class MeshFactory{
 public:
   static MeshPtr loadFromHDF5(BFPtr bf, string filename);
-  static MeshPtr rectilinearMesh(BFPtr bf, vector<double> dimensions, vector<int>elementCounts, int H1Order, int pToAddTest=-1,vector<double> x0 = vector<double>());
+  static MeshPtr rectilinearMesh(BFPtr bf, std::vector<double> dimensions, std::vector<int>elementCounts, int H1Order, int pToAddTest=-1,vector<double> x0 = std::vector<double>());
   static MeshPtr readTriangle(string filePath, Teuchos::RCP< BF > bilinearForm, int H1Order, int pToAdd);
 };

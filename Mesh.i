@@ -7,7 +7,17 @@
 %include "std_set.i"
 %include "std_vector.i"
 
+namespace std {
+  %template(IntVector) vector<int>;
+  %template(UnsignedSet) set<unsigned>;
+ }
+
 %nodefaultctor Mesh;
+
+typedef unsigned GlobalIndexType;
+
+using namespace std;
+
 class Mesh{
 public:
   void saveToHDF5(string filename);
