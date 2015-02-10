@@ -4,13 +4,18 @@
 %}
 
 %include "std_string.i"
+%include "std_map.i"
+
+namespace std {
+%template(map_int_FunctionPtr) map<int, FunctionPtr>;
+}
 
 class LinearTerm {
 public:
   LinearTerm();
   const set<int> & varIDs();
   VarType termType();
-  FunctionPtr evaluate(map< int, FunctionPtr> &varFunctions);
+  FunctionPtr evaluate(std::map< int, FunctionPtr> &varFunctions);
   int rank();
   string displayString();
 

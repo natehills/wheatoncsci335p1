@@ -16,7 +16,7 @@ namespace std {
 
 class Function {
 public:
-  string displayString();
+  std::string displayString();
   double evaluate(double x);
   double evaluate(double x, double y);
   double evaluate(double x, double y, double z);
@@ -76,6 +76,9 @@ public:
     FunctionPtr __rmul__(double value) {
       return *self * value;
     }
+    FunctionPtr __mul__(FunctionPtr f2) {
+      return *self *  f2;
+    }
     FunctionPtr __mul__(vector<double> weight) {
       return *self *  weight;
     }
@@ -100,7 +103,7 @@ public:
     FunctionPtr __rsub__(double value) {
       return value - *self;
     }
-    FunctionPtr __sub__() {
+    FunctionPtr __neg__() {
       return - *self;
     }
 
