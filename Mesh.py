@@ -98,6 +98,93 @@ class SwigPyIterator(_object):
 SwigPyIterator_swigregister = _Mesh.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
+class IntVector(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, IntVector, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, IntVector, name)
+    __repr__ = _swig_repr
+    def iterator(self): return _Mesh.IntVector_iterator(self)
+    def __iter__(self): return self.iterator()
+    def __nonzero__(self): return _Mesh.IntVector___nonzero__(self)
+    def __bool__(self): return _Mesh.IntVector___bool__(self)
+    def __len__(self): return _Mesh.IntVector___len__(self)
+    def pop(self): return _Mesh.IntVector_pop(self)
+    def __getslice__(self, *args): return _Mesh.IntVector___getslice__(self, *args)
+    def __setslice__(self, *args): return _Mesh.IntVector___setslice__(self, *args)
+    def __delslice__(self, *args): return _Mesh.IntVector___delslice__(self, *args)
+    def __delitem__(self, *args): return _Mesh.IntVector___delitem__(self, *args)
+    def __getitem__(self, *args): return _Mesh.IntVector___getitem__(self, *args)
+    def __setitem__(self, *args): return _Mesh.IntVector___setitem__(self, *args)
+    def append(self, *args): return _Mesh.IntVector_append(self, *args)
+    def empty(self): return _Mesh.IntVector_empty(self)
+    def size(self): return _Mesh.IntVector_size(self)
+    def clear(self): return _Mesh.IntVector_clear(self)
+    def swap(self, *args): return _Mesh.IntVector_swap(self, *args)
+    def get_allocator(self): return _Mesh.IntVector_get_allocator(self)
+    def begin(self): return _Mesh.IntVector_begin(self)
+    def end(self): return _Mesh.IntVector_end(self)
+    def rbegin(self): return _Mesh.IntVector_rbegin(self)
+    def rend(self): return _Mesh.IntVector_rend(self)
+    def pop_back(self): return _Mesh.IntVector_pop_back(self)
+    def erase(self, *args): return _Mesh.IntVector_erase(self, *args)
+    def __init__(self, *args): 
+        this = _Mesh.new_IntVector(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def push_back(self, *args): return _Mesh.IntVector_push_back(self, *args)
+    def front(self): return _Mesh.IntVector_front(self)
+    def back(self): return _Mesh.IntVector_back(self)
+    def assign(self, *args): return _Mesh.IntVector_assign(self, *args)
+    def resize(self, *args): return _Mesh.IntVector_resize(self, *args)
+    def insert(self, *args): return _Mesh.IntVector_insert(self, *args)
+    def reserve(self, *args): return _Mesh.IntVector_reserve(self, *args)
+    def capacity(self): return _Mesh.IntVector_capacity(self)
+    __swig_destroy__ = _Mesh.delete_IntVector
+    __del__ = lambda self : None;
+IntVector_swigregister = _Mesh.IntVector_swigregister
+IntVector_swigregister(IntVector)
+
+class UnsignedSet(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, UnsignedSet, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, UnsignedSet, name)
+    __repr__ = _swig_repr
+    def iterator(self): return _Mesh.UnsignedSet_iterator(self)
+    def __iter__(self): return self.iterator()
+    def __nonzero__(self): return _Mesh.UnsignedSet___nonzero__(self)
+    def __bool__(self): return _Mesh.UnsignedSet___bool__(self)
+    def __len__(self): return _Mesh.UnsignedSet___len__(self)
+    def append(self, *args): return _Mesh.UnsignedSet_append(self, *args)
+    def __contains__(self, *args): return _Mesh.UnsignedSet___contains__(self, *args)
+    def __getitem__(self, *args): return _Mesh.UnsignedSet___getitem__(self, *args)
+    def add(self, *args): return _Mesh.UnsignedSet_add(self, *args)
+    def discard(self, *args): return _Mesh.UnsignedSet_discard(self, *args)
+    def __init__(self, *args): 
+        this = _Mesh.new_UnsignedSet(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def empty(self): return _Mesh.UnsignedSet_empty(self)
+    def size(self): return _Mesh.UnsignedSet_size(self)
+    def clear(self): return _Mesh.UnsignedSet_clear(self)
+    def swap(self, *args): return _Mesh.UnsignedSet_swap(self, *args)
+    def count(self, *args): return _Mesh.UnsignedSet_count(self, *args)
+    def begin(self): return _Mesh.UnsignedSet_begin(self)
+    def end(self): return _Mesh.UnsignedSet_end(self)
+    def rbegin(self): return _Mesh.UnsignedSet_rbegin(self)
+    def rend(self): return _Mesh.UnsignedSet_rend(self)
+    def erase(self, *args): return _Mesh.UnsignedSet_erase(self, *args)
+    def find(self, *args): return _Mesh.UnsignedSet_find(self, *args)
+    def lower_bound(self, *args): return _Mesh.UnsignedSet_lower_bound(self, *args)
+    def upper_bound(self, *args): return _Mesh.UnsignedSet_upper_bound(self, *args)
+    def equal_range(self, *args): return _Mesh.UnsignedSet_equal_range(self, *args)
+    def insert(self, *args): return _Mesh.UnsignedSet_insert(self, *args)
+    __swig_destroy__ = _Mesh.delete_UnsignedSet
+    __del__ = lambda self : None;
+UnsignedSet_swigregister = _Mesh.UnsignedSet_swigregister
+UnsignedSet_swigregister(UnsignedSet)
+
 class Mesh(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Mesh, name, value)

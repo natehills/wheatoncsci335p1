@@ -164,6 +164,24 @@ class IP(_object):
 IP_swigregister = _IP.IP_swigregister
 IP_swigregister(IP)
 
+class IPPtr(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, IPPtr, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, IPPtr, name)
+    __repr__ = _swig_repr
+    def __deref__(self): return _IP.IPPtr___deref__(self)
+    def __init__(self): 
+        this = _IP.new_IPPtr()
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _IP.delete_IPPtr
+    __del__ = lambda self : None;
+    def addTerm(self, *args): return _IP.IPPtr_addTerm(self, *args)
+    def evaluate(self, *args): return _IP.IPPtr_evaluate(self, *args)
+IPPtr_swigregister = _IP.IPPtr_swigregister
+IPPtr_swigregister(IPPtr)
+
 # This file is compatible with both classic and new-style classes.
 
 
