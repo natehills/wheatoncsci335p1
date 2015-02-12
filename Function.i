@@ -5,6 +5,12 @@
 %}
 
 %include "std_string.i"
+%include "std_vector.i"
+
+namespace std {
+  %template(DoubleVector) vector<double>;
+
+}
 
 %nodefaultctor Function;  // Disable the default constructor for class Function
 
@@ -35,6 +41,7 @@ public:
   static FunctionPtr yn(int n=1);
   static FunctionPtr composedFunction( FunctionPtr f, FunctionPtr arg_g);
   static FunctionPtr constant(double value);
+  static FunctionPtr constant(vector<double> &value);
   static FunctionPtr vectorize(FunctionPtr f1, FunctionPtr f2);
   static FunctionPtr normal();
   static FunctionPtr solution(VarPtr var, SolutionPtr soln);
