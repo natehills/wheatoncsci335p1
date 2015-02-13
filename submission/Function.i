@@ -80,10 +80,10 @@ public:
     FunctionPtr __mul__(FunctionPtr f2) {
       return *self *  f2;
     }
-    FunctionPtr __mul__(vector<double> weight) {
+    FunctionPtr __mul__(std::vector<double> weight) {
       return *self *  weight;
     }
-    FunctionPtr __rmul__(vector<double> weight) {
+    FunctionPtr __rmul__(std::vector<double> weight) {
       return *self * weight;
     }
     FunctionPtr __div__(FunctionPtr scalarDivision) {
