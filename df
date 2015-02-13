@@ -1,0 +1,238 @@
+commit 282bde8cc2017aee8042b19850f74b6932a775aa
+Merge: 74b2d61 2d7b4e6
+Author: Nathaniel L. Hills <nate.hills@cslab02.wheaton.edu>
+Date:   Mon Feb 9 21:27:42 2015 -0600
+
+    Merge branch 'master' of https://github.com/natehills/wheatoncsci335p1
+
+commit 2d7b4e60fc7041644fbda60e60d746a88f8e0b74
+Author: Jeffrey D. Burge <jeffrey.burge@cslab01.wheaton.edu>
+Date:   Mon Feb 9 20:34:24 2015 -0600
+
+    all other files
+
+commit 03d90d8a300e5d7ead01a2d56a368dc6760aa845
+Author: Jeffrey D. Burge <jeffrey.burge@cslab01.wheaton.edu>
+Date:   Mon Feb 9 20:33:35 2015 -0600
+
+    added makefile
+
+commit 74b2d614144cdd5a0faaf269842b269fe5326e38
+Merge: dff9b7b 2a2bdd8
+Author: Nathaniel L. Hills <nate.hills@cslab02.wheaton.edu>
+Date:   Mon Feb 9 20:33:09 2015 -0600
+
+    Merge branch 'master' of https://github.com/natehills/wheatoncsci335p1
+
+commit dff9b7b3662eabee8421c81e79d9176457b4da5f
+Merge: 1586045 f6c78e8
+Author: Nathaniel L. Hills <nate.hills@cslab02.wheaton.edu>
+Date:   Mon Feb 9 20:32:42 2015 -0600
+
+    Merge branch 'master' of https://github.com/natehills/wheatoncsci335p1
+    
+    Conflicts:
+    	Function.pyc
+    	Var.pyc
+
+commit 2a2bdd84648cf9bfcff16e7a1dd5cd6c398d1c6c
+Author: Jeffrey D. Burge <jeffrey.burge@cslab01.wheaton.edu>
+Date:   Mon Feb 9 20:31:47 2015 -0600
+
+    updated all .i files
+
+commit 1586045ff10a6c8951d76d0be301449a47fe5c4b
+Author: Nathaniel L. Hills <nate.hills@cslab02.wheaton.edu>
+Date:   Mon Feb 9 20:29:26 2015 -0600
+
+    I don't kmow what I just did
+
+commit f6c78e88425aadc0294d5cf96d09c5645e167510
+Merge: bc14e80 d856896
+Author: Jeffrey D. Burge <jeffrey.burge@cslab01.wheaton.edu>
+Date:   Mon Feb 9 20:23:37 2015 -0600
+
+    Merge branch 'master' of https://github.com/natehills/wheatoncsci335p1
+
+commit bc14e80e430731a09747516b2c3ac9124a8291f9
+Author: Jeffrey D. Burge <jeffrey.burge@cslab01.wheaton.edu>
+Date:   Mon Feb 9 20:23:26 2015 -0600
+
+    updated function
+
+commit d8568960950f8b5111fa4cae0847f1f1bbde888a
+Author: Blake Edward Hensel <blake.hensel@cslab23.wheaton.edu>
+Date:   Thu Feb 5 21:43:33 2015 -0600
+
+    more
+
+commit 12b8145aab59b753a6c531e7a697ac5a5d155083
+Author: Blake Edward Hensel <blake.hensel@cslab23.wheaton.edu>
+Date:   Thu Feb 5 21:40:33 2015 -0600
+
+    fixed IP test!
+
+commit 90d2faefbaeb065ee97981d3962957f87175f5ac
+Merge: e2fc86e 7241720
+Author: Blake Edward Hensel <blake.hensel@cslab24.wheaton.edu>
+Date:   Thu Feb 5 16:03:31 2015 -0600
+
+    Merge branch 'master' of https://github.com/natehills/wheatoncsci335p1
+    
+    Conflicts:
+    	Function.pyc
+    	FunctionTestRunner.py
+    	FunctionTestRunner.pyc
+    	LinearTerm.pyc
+    	Var.pyc
+    	VarFactory.pyc
+
+commit e2fc86ea12b2a0568bc0be22f8a5710dc9348435
+Author: Blake Edward Hensel <blake.hensel@cslab24.wheaton.edu>
+Date:   Thu Feb 5 15:58:57 2015 -0600
+
+    "added FunctionTests"
+
+commit 7241720b563d9c841e6a4b85224f4c2a95e9383e
+Merge: ce7b771 de8be39
+Author: Jeffrey D. Burge <jeffrey.burge@cslab23.wheaton.edu>
+Date:   Thu Feb 5 15:57:53 2015 -0600
+
+    finished methods of function
+
+commit ce7b7718cf17c891f6a3f8e87df0aed566cea5ab
+Author: Jeffrey D. Burge <jeffrey.burge@cslab23.wheaton.edu>
+Date:   Thu Feb 5 14:06:13 2015 -0600
+
+    Jeff Thurs 2/5
+
+commit ab7551433800296d6a3a3ba92023e7f7966aedeb
+Merge: 5bc6e8e de8be39
+Author: Nathaniel L. Hills <nate.hills@cslab05.wheaton.edu>
+Date:   Wed Feb 4 19:35:02 2015 -0600
+
+    Merge branch 'master' of https://github.com/natehills/wheatoncsci335p1
+    
+    Conflicts:
+    	Function.pyc
+    	Var.pyc
+
+commit 5bc6e8eeaa9e76539f44da84e69940f5cc2e0e9f
+Author: Nathaniel L. Hills <nate.hills@cslab05.wheaton.edu>
+Date:   Wed Feb 4 19:34:03 2015 -0600
+
+    Deleted a file
+
+commit e7ff174c94952167038ab38a419bb39e049ca586
+Author: Nathaniel L. Hills <nate.hills@cslab05.wheaton.edu>
+Date:   Wed Feb 4 19:30:30 2015 -0600
+
+    Commited
+
+commit de8be3944b939e03b2a635bb3984dc3ae41856e5
+Author: Blake Edward Hensel <blake.hensel@cslab24.wheaton.edu>
+Date:   Tue Feb 3 14:58:50 2015 -0600
+
+    general stuff
+
+commit 05429501312acfbf23fcff15c81367c3d435f258
+Author: Blake Edward Hensel <blake.hensel@cslab03.wheaton.edu>
+Date:   Mon Feb 2 21:38:09 2015 -0600
+
+    tests
+
+commit 114f3108eb8928d5cb2201b488b86f5aaecd8bc0
+Merge: bb673e7 6a9c003
+Author: Blake Edward Hensel <blake.hensel@cslab03.wheaton.edu>
+Date:   Mon Feb 2 21:36:07 2015 -0600
+
+    merge
+
+commit bb673e7d95e1dcbbfbc76154ec7c3ce354cfd078
+Author: Blake Edward Hensel <blake.hensel@cslab03.wheaton.edu>
+Date:   Mon Feb 2 21:34:22 2015 -0600
+
+    function tests
+
+commit 6a9c003330a17362ca12935b897dc2d8de191bea
+Author: natehills <nate.hills@my.wheaton.edu>
+Date:   Mon Feb 2 21:30:40 2015 -0600
+
+    Create README.md
+
+commit a0171519db7a46e1c6230a0a47f18b88cd60ace7
+Author: Jeffrey D. Burge <jeffrey.burge@cslab02.wheaton.edu>
+Date:   Mon Feb 2 21:29:01 2015 -0600
+
+    lots of updated .i files
+
+commit 1524bfbdf096963ce2b63e3e846bd9690c3ed7b3
+Author: Nathaniel L. Hills <nate.hills@cslab01.wheaton.edu>
+Date:   Mon Feb 2 21:06:25 2015 -0600
+
+    Fixed RHS
+
+commit dd3b3a0f55b69d46e214fc98aa9b5f2cc3d9be43
+Author: Blake Edward Hensel <blake.hensel@cslab17.wheaton.edu>
+Date:   Thu Jan 29 21:28:34 2015 -0600
+
+    commiting changes to swig and build
+
+commit 7931af2c64dfce65b4edb4f81024c93612bad2f1
+Merge: b5452de 8e8b5cc
+Author: Nathaniel L. Hills <nate.hills@cslab03.wheaton.edu>
+Date:   Mon Jan 26 21:42:36 2015 -0600
+
+    Merge branch 'master' of https://github.com/natehills/wheatoncsci335p1
+    
+    Conflicts:
+    	LinearTerm.i~
+
+commit b5452de2f391248f20a3f13bd383af43c2864b89
+Author: Nathaniel L. Hills <nate.hills@cslab03.wheaton.edu>
+Date:   Mon Jan 26 21:40:19 2015 -0600
+
+    Fixed a mistake in LinearTerm
+
+commit 8e8b5ccdd6a932aed2a97e6b4fc90c2d2355758b
+Author: natehills <nate.hills@my.wheaton.edu>
+Date:   Mon Jan 26 21:37:01 2015 -0600
+
+    Delete LinearTerm.i~
+
+commit 7d7319a506b345240aa2cfce3e8c40e2b6a15ad4
+Author: Nathaniel L. Hills <nate.hills@cslab03.wheaton.edu>
+Date:   Mon Jan 26 21:35:24 2015 -0600
+
+    LinearTerm.i file added
+
+commit c87a901d5b3c2e52ea5c0eabd7ac58e5833a3510
+Merge: 177027b 68b45ea
+Author: Blake Edward Hensel <blake.hensel@cslab02.wheaton.edu>
+Date:   Mon Jan 26 20:55:12 2015 -0600
+
+    merged function
+
+commit 177027b774d25a757dc1d099b1fd7de2d592c5a9
+Author: Blake Edward Hensel <blake.hensel@cslab02.wheaton.edu>
+Date:   Mon Jan 26 20:49:00 2015 -0600
+
+    Adding more Function
+
+commit 68b45ea8ea943328362d2ac6401d6b0d24ca7de1
+Author: Jeffrey D. Burge <jeffrey.burge@cslab01.wheaton.edu>
+Date:   Mon Jan 26 20:40:03 2015 -0600
+
+    Added RHS
+
+commit 7254988d3a6b7c9469ebb4899819ee747dc5a566
+Author: Nathaniel L. Hills <nate.hills@cslab03.wheaton.edu>
+Date:   Mon Jan 26 20:30:35 2015 -0600
+
+    Added IP
+
+commit 5c909ea900b199b3d51cdfe7a501ef4253934524
+Author: Jeffrey D. Burge <jeffrey.burge@cslab01.wheaton.edu>
+Date:   Mon Jan 26 20:24:08 2015 -0600
+
+    first commit

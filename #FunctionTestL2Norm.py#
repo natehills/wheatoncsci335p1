@@ -1,0 +1,21 @@
+from Function import *
+import Function
+import PoissonFormulation
+import Var
+import Solution
+import MeshFactory
+import Mesh
+import BF
+import unittest
+import math
+
+class FunctionTestL2Norm(unittest.TestCase):
+  def testL2Norm(self):
+      poissonForm = PoissonFormulation.PoissonFormulation(2,True)
+      poissonBF = poissonForm.bf()
+      mesh = MeshFactory.MeshFactory_rectilinearMesh(poissonBF,[1.0,1.0],[2,3],2)
+      x2 = Function.Function_xn(2)
+      
+
+if (__name__ == '__main__'):
+  unittest.main()
