@@ -6,6 +6,7 @@
 %include "std_string.i"
 %include "std_map.i"
 %include "std_set.i"
+%include "Var.i"
 
 namespace std {
 %template(map_int_FunctionPtr) map<int, FunctionPtr>;
@@ -14,6 +15,8 @@ namespace std {
 namespace std {
 %template(set_int) set<int>;
 }
+
+using namespace Camellia;
 
 class LinearTerm {
 public:

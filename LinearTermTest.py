@@ -21,7 +21,9 @@ class LinearTermTest(unittest.TestCase):
     test4 = varFact.fieldVar("2y")
     ltp = test1 + test2
     self.assertEqual(ltp.rank(),0)
-    self.assertEqual(ltp.termType(), Var_VarType.FIELD)
+    bool = (ltp.termType() == Var.FIELD)
+    self.assertTrue(bool)
+    #self.assertEqual(ltp.termType(), Var.FIELD)
 
     varFunctions = LinearTerm.map_int_FunctionPtr({test1.ID(): Function.Function_xn(1), test2.ID(): Function.Function_yn(1), test3.ID(): Function.Function_xn(1) * 2, test4.ID(): Function.Function_yn(1) * 2})
     varID = (test1.ID(), test2.ID())
@@ -65,14 +67,20 @@ class LinearTermTest(unittest.TestCase):
     self.assertEqual(eval.evaluate(1,1), 4.0)
     # Double * Var   2x * 2
 
-    doubV = [1.0, 1.0] 
+    doubV = [1.0, 1.0]
     ltp = test1 * doubV
     self.assertEqual(ltp.rank(),1)
     eval = ltp.evaluate(varFunctions) #gives vector-valued function
-    self.assertEqual(eval.evaluate(2,1), 2.0)
+    x = eval.x()
+    y = eval.y()
+    self.assertEqual(x.evaluate(2,1), 2.0)
+    self.assertEqual(x.evaluate(5,3), 5.0)
     ltp = doubV * test1
     eval = ltp.evaluate(varFunctions)
-    self.assertEqual(eval.evaluate(2,1), 2.0)
+    x = eval.x()
+    y = eval.y()
+    self.assertEqual(x.evaluate(2,1), 2.0)
+    self.assertEqual(x.evaluate(4,3), 4.0)
 
     ltp = test3 + test4
     ltp2 = funPtr * ltp

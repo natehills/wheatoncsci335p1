@@ -1,6 +1,7 @@
 %module LinearTerm
 %{
 #include "LinearTerm.h"
+#include "Var.h"
 %}
 
 %include "std_string.i"
@@ -42,11 +43,11 @@ public:
     /**LinearTermPtr __radd__(VarPtr v){
       return *self + v;
     }
-       This needs to be added to Var.i in order to work
-    LinearTermPtr __rmul__(VarPtr v) {
-      return *self * v;
-    }
     **/
+    LinearTermPtr __rmul__(FunctionPtr f) {
+      return f * *self ;
+    }
+
     LinearTermPtr __neg__() { 
       return - *self;
     }
