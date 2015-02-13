@@ -147,6 +147,46 @@ class map_int_FunctionPtr(_object):
 map_int_FunctionPtr_swigregister = _LinearTerm.map_int_FunctionPtr_swigregister
 map_int_FunctionPtr_swigregister(map_int_FunctionPtr)
 
+class set_int(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, set_int, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, set_int, name)
+    __repr__ = _swig_repr
+    def iterator(self): return _LinearTerm.set_int_iterator(self)
+    def __iter__(self): return self.iterator()
+    def __nonzero__(self): return _LinearTerm.set_int___nonzero__(self)
+    def __bool__(self): return _LinearTerm.set_int___bool__(self)
+    def __len__(self): return _LinearTerm.set_int___len__(self)
+    def append(self, *args): return _LinearTerm.set_int_append(self, *args)
+    def __contains__(self, *args): return _LinearTerm.set_int___contains__(self, *args)
+    def __getitem__(self, *args): return _LinearTerm.set_int___getitem__(self, *args)
+    def add(self, *args): return _LinearTerm.set_int_add(self, *args)
+    def discard(self, *args): return _LinearTerm.set_int_discard(self, *args)
+    def __init__(self, *args): 
+        this = _LinearTerm.new_set_int(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def empty(self): return _LinearTerm.set_int_empty(self)
+    def size(self): return _LinearTerm.set_int_size(self)
+    def clear(self): return _LinearTerm.set_int_clear(self)
+    def swap(self, *args): return _LinearTerm.set_int_swap(self, *args)
+    def count(self, *args): return _LinearTerm.set_int_count(self, *args)
+    def begin(self): return _LinearTerm.set_int_begin(self)
+    def end(self): return _LinearTerm.set_int_end(self)
+    def rbegin(self): return _LinearTerm.set_int_rbegin(self)
+    def rend(self): return _LinearTerm.set_int_rend(self)
+    def erase(self, *args): return _LinearTerm.set_int_erase(self, *args)
+    def find(self, *args): return _LinearTerm.set_int_find(self, *args)
+    def lower_bound(self, *args): return _LinearTerm.set_int_lower_bound(self, *args)
+    def upper_bound(self, *args): return _LinearTerm.set_int_upper_bound(self, *args)
+    def equal_range(self, *args): return _LinearTerm.set_int_equal_range(self, *args)
+    def insert(self, *args): return _LinearTerm.set_int_insert(self, *args)
+    __swig_destroy__ = _LinearTerm.delete_set_int
+    __del__ = lambda self : None;
+set_int_swigregister = _LinearTerm.set_int_swigregister
+set_int_swigregister(set_int)
+
 class LinearTerm(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, LinearTerm, name, value)
@@ -175,8 +215,8 @@ class LinearTermPtr(_object):
     __repr__ = _swig_repr
     def __deref__(self): return _LinearTerm.LinearTermPtr___deref__(self)
     def __add__(self, *args): return _LinearTerm.LinearTermPtr___add__(self, *args)
-    def __radd__(self, *args): return _LinearTerm.LinearTermPtr___radd__(self, *args)
-    def __rsub__(self, *args): return _LinearTerm.LinearTermPtr___rsub__(self, *args)
+    def __rmul__(self, *args): return _LinearTerm.LinearTermPtr___rmul__(self, *args)
+    def __neg__(self): return _LinearTerm.LinearTermPtr___neg__(self)
     def __sub__(self, *args): return _LinearTerm.LinearTermPtr___sub__(self, *args)
     def __init__(self): 
         this = _LinearTerm.new_LinearTermPtr()

@@ -5,10 +5,14 @@
 %}
 
 %include "std_string.i"
+%include "std_vector.i"
 
 %nodefaultctor Var;  // Disable the default constructor for class Var
 
+namespace std {
 
+  %template(DoubleVector) vector<double>;
+}
 using namespace std;
 
 // need if a type is Space
@@ -101,6 +105,10 @@ public:
       return *self / w;
     }
 
+    LinearTermPtr __add__(LinearTermPtr a){
+      return *self + a;
+    }
+
     LinearTermPtr __div__(FunctionPtr f) {
       return *self / f;
     }
@@ -109,7 +117,11 @@ public:
       return *self - v;
     }
 
-    LinearTermPtr __sub__() {
+    LinearTermPtr __sub__(LinearTermPtr p) { 
+      return *self - p;
+    }
+
+    LinearTermPtr __neg__() {
       return - *self;
     }
   }

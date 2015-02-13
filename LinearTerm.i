@@ -5,15 +5,20 @@
 
 %include "std_string.i"
 %include "std_map.i"
+%include "std_set.i"
 
 namespace std {
 %template(map_int_FunctionPtr) map<int, FunctionPtr>;
 }
 
+namespace std {
+%template(set_int) set<int>;
+}
+
 class LinearTerm {
 public:
   LinearTerm();
-  const set<int> & varIDs();
+  const std::set<int> & varIDs();
   VarType termType();
   FunctionPtr evaluate(std::map< int, FunctionPtr> &varFunctions);
   int rank();
@@ -34,27 +39,26 @@ public:
       return *self + v;
     }
 
-    LinearTermPtr __radd__(VarPtr v){
+    /**LinearTermPtr __radd__(VarPtr v){
       return *self + v;
     }
-    /**
-       This needs to be added to Var.i in order to work
-    LinearTermPtr __rmul__(VarPtr v) {
-      return *self * v;
-    }
     **/
-    LinearTermPtr __sub__() { 
+    LinearTermPtr __rmul__(FunctionPtr f) {
+      return f * *self ;
+    }
+
+    LinearTermPtr __neg__() { 
       return - *self;
     }
 
     LinearTermPtr __sub__(VarPtr v) { 
       return *self - v;
     }
-
+    /**
     LinearTermPtr __rsub__(VarPtr v) { 
       return v - *self;
     }
-
+    **/
     LinearTermPtr __sub__(LinearTermPtr a) { 
       return *self - a;
     }

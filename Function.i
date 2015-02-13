@@ -9,8 +9,8 @@
 
 namespace std {
   %template(DoubleVector) vector<double>;
-
 }
+
 
 %nodefaultctor Function;  // Disable the default constructor for class Function
 
