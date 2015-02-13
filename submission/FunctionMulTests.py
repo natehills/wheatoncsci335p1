@@ -19,6 +19,12 @@ class FunctionMulTests(unittest.TestCase):
       r = randint(2,x)
       t = randint(1,15)
       self.assertAlmostEquals(t*g.evaluate(r),(t*g).evaluate(r), delta=1e-12)
+    forwardTest = Function.Function_xn(2)
+    sol = forwardTest * Function.DoubleVector(2,2.0)
+    self.assertAlmostEqual(8 ,sol.x().evaluate(2), delta=1e-12)
+    backwardTest = Function.Function_xn(2)
+    sol = Function.DoubleVector(2,2.0) * backwardTest
+    self.assertAlmostEqual(8 ,sol.x().evaluate(2), delta=1e-12)
 
 if (__name__ == '__main__'):
   unittest.main()
