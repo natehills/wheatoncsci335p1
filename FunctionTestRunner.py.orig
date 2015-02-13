@@ -1,23 +1,41 @@
 from FunctionXNYNTest import *
-<<<<<<< HEAD
+#from FunctionTestInstance import *
+from FunctionTestRank import *
+from FunctionTestEvaluate import *
 from FunctionDivTests import *
 from FunctionAddTests import *
 from FunctionSubTests import *
 from FunctionMulTests import *
+<<<<<<< HEAD
+#from IPTest import *
+from FunctionTestL2Norm import *
+=======
+from IPTest import *
+
+from LinearTermTest import *
+
+from RHSTest import *
+
+>>>>>>> dc7d76884a28dbb54f4c92894290a1777cdca077
 import unittest
 
 testSuite = unittest.makeSuite(FunctionXNYNTest)
+#testSuite.addTest(unittest.makeSuite(FunctionTestInstance))
+testSuite.addTest(unittest.makeSuite(FunctionTestRank))
+testSuite.addTest(unittest.makeSuite(FunctionTestEvaluate))
 testSuite.addTest(unittest.makeSuite(FunctionDivTests))
 testSuite.addTest(unittest.makeSuite(FunctionAddTests))
 testSuite.addTest(unittest.makeSuite(FunctionSubTests))
 testSuite.addTest(unittest.makeSuite(FunctionMulTests))
+<<<<<<< HEAD
+#testSuite.addTest(unittest.makeSuite(IPTest))
+testSuite.addTest(unittest.makeSuite(FunctionTestL2Norm))
 =======
-from FunctionTestInstance import *
-import unittest
+testSuite.addTest(unittest.makeSuite(IPTest))
+testSuite.addTest(unittest.makeSuite(LinearTermTest))
+testSuite.addTest(unittest.makeSuite(RHSTest))
 
-testSuite = unittest.makeSuite(FunctionXNYNTest)
-testSuite.addTest(unittest.makeSuite(FunctionTestInstance))
->>>>>>> 7241720b563d9c841e6a4b85224f4c2a95e9383e
+>>>>>>> dc7d76884a28dbb54f4c92894290a1777cdca077
 
 testRunner = unittest.TextTestRunner()
 testRunner.run(testSuite)
