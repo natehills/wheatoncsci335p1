@@ -20,6 +20,8 @@ class LinearTermTest(unittest.TestCase):
     test3 = varFact.fieldVar("2x")
     test4 = varFact.fieldVar("2y")
     ltp = test1 + test2
+    str = ' x +  y'
+    self.assertEqual(str, ltp.displayString())
     self.assertEqual(ltp.rank(),0)
     bool = (ltp.termType() == Var.FIELD)
     self.assertTrue(bool)

@@ -29,8 +29,8 @@ class LinearTermTest(unittest.TestCase):
 
     varFunctions = LinearTerm.map_int_FunctionPtr({test1.ID(): Function.Function_xn(1), test2.ID(): Function.Function_yn(1), test3.ID(): Function.Function_xn(1) * 2, test4.ID(): Function.Function_yn(1) * 2})
     varID = (test1.ID(), test2.ID())
-    #add overloads
 
+    #add overloads
     eval = ltp.evaluate(varFunctions)
     self.assertEqual(eval.evaluate(1,1), 2.0)
     self.assertEqual(ltp.varIDs(), varID) # tests varIDs()
