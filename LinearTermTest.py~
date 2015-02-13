@@ -74,13 +74,13 @@ class LinearTermTest(unittest.TestCase):
     x = eval.x()
     y = eval.y()
     self.assertEqual(x.evaluate(2,1), 2.0)
-    self.assertEqual(x.evaluate(2,3), 3.0)
+    self.assertEqual(x.evaluate(5,3), 5.0)
     ltp = doubV * test1
     eval = ltp.evaluate(varFunctions)
     x = eval.x()
     y = eval.y()
     self.assertEqual(x.evaluate(2,1), 2.0)
-    self.assertEqual(x.evaluate(2,3), 3.0)
+    self.assertEqual(x.evaluate(4,3), 4.0)
 
     ltp = test3 + test4
     ltp2 = funPtr * ltp
