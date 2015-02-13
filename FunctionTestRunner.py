@@ -5,8 +5,12 @@ from FunctionAddTests import *
 from FunctionSubTests import *
 from FunctionMulTests import *
 from IPTest import *
+from testLinearTermBasic import *
+from testLinearTermAdd import *
+from testLinearTermMul import *
+from testLinearTermDiv import *
+from testLinearTermSub import *
 
-from LinearTermTest import *
 
 from RHSTest import *
 
@@ -19,7 +23,11 @@ testSuite.addTest(unittest.makeSuite(FunctionAddTests))
 testSuite.addTest(unittest.makeSuite(FunctionSubTests))
 testSuite.addTest(unittest.makeSuite(FunctionMulTests))
 testSuite.addTest(unittest.makeSuite(IPTest))
-testSuite.addTest(unittest.makeSuite(LinearTermTest))
+testSuite.addTest(unittest.makeSuite(testLinearTermBasic))
+testSuite.addTest(unittest.makeSuite(testLinearTermAdd))
+testSuite.addTest(unittest.makeSuite(testLinearTermMul))
+testSuite.addTest(unittest.makeSuite(testLinearTermDiv))
+testSuite.addTest(unittest.makeSuite(testLinearTermSub))
 testSuite.addTest(unittest.makeSuite(RHSTest))
 
 
