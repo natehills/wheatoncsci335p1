@@ -98,183 +98,163 @@ class SwigPyIterator(_object):
 SwigPyIterator_swigregister = _Var.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
-class SetInt(_object):
+class DoubleVector(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, SetInt, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, DoubleVector, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, SetInt, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, DoubleVector, name)
     __repr__ = _swig_repr
-    def iterator(self): return _Var.SetInt_iterator(self)
+    def iterator(self): return _Var.DoubleVector_iterator(self)
     def __iter__(self): return self.iterator()
-    def __nonzero__(self): return _Var.SetInt___nonzero__(self)
-    def __bool__(self): return _Var.SetInt___bool__(self)
-    def __len__(self): return _Var.SetInt___len__(self)
-    def append(self, *args): return _Var.SetInt_append(self, *args)
-    def __contains__(self, *args): return _Var.SetInt___contains__(self, *args)
-    def __getitem__(self, *args): return _Var.SetInt___getitem__(self, *args)
-    def add(self, *args): return _Var.SetInt_add(self, *args)
-    def discard(self, *args): return _Var.SetInt_discard(self, *args)
+    def __nonzero__(self): return _Var.DoubleVector___nonzero__(self)
+    def __bool__(self): return _Var.DoubleVector___bool__(self)
+    def __len__(self): return _Var.DoubleVector___len__(self)
+    def pop(self): return _Var.DoubleVector_pop(self)
+    def __getslice__(self, *args): return _Var.DoubleVector___getslice__(self, *args)
+    def __setslice__(self, *args): return _Var.DoubleVector___setslice__(self, *args)
+    def __delslice__(self, *args): return _Var.DoubleVector___delslice__(self, *args)
+    def __delitem__(self, *args): return _Var.DoubleVector___delitem__(self, *args)
+    def __getitem__(self, *args): return _Var.DoubleVector___getitem__(self, *args)
+    def __setitem__(self, *args): return _Var.DoubleVector___setitem__(self, *args)
+    def append(self, *args): return _Var.DoubleVector_append(self, *args)
+    def empty(self): return _Var.DoubleVector_empty(self)
+    def size(self): return _Var.DoubleVector_size(self)
+    def clear(self): return _Var.DoubleVector_clear(self)
+    def swap(self, *args): return _Var.DoubleVector_swap(self, *args)
+    def get_allocator(self): return _Var.DoubleVector_get_allocator(self)
+    def begin(self): return _Var.DoubleVector_begin(self)
+    def end(self): return _Var.DoubleVector_end(self)
+    def rbegin(self): return _Var.DoubleVector_rbegin(self)
+    def rend(self): return _Var.DoubleVector_rend(self)
+    def pop_back(self): return _Var.DoubleVector_pop_back(self)
+    def erase(self, *args): return _Var.DoubleVector_erase(self, *args)
     def __init__(self, *args): 
-        this = _Var.new_SetInt(*args)
+        this = _Var.new_DoubleVector(*args)
         try: self.this.append(this)
         except: self.this = this
-    def empty(self): return _Var.SetInt_empty(self)
-    def size(self): return _Var.SetInt_size(self)
-    def clear(self): return _Var.SetInt_clear(self)
-    def swap(self, *args): return _Var.SetInt_swap(self, *args)
-    def count(self, *args): return _Var.SetInt_count(self, *args)
-    def begin(self): return _Var.SetInt_begin(self)
-    def end(self): return _Var.SetInt_end(self)
-    def rbegin(self): return _Var.SetInt_rbegin(self)
-    def rend(self): return _Var.SetInt_rend(self)
-    def erase(self, *args): return _Var.SetInt_erase(self, *args)
-    def find(self, *args): return _Var.SetInt_find(self, *args)
-    def lower_bound(self, *args): return _Var.SetInt_lower_bound(self, *args)
-    def upper_bound(self, *args): return _Var.SetInt_upper_bound(self, *args)
-    def equal_range(self, *args): return _Var.SetInt_equal_range(self, *args)
-    def insert(self, *args): return _Var.SetInt_insert(self, *args)
-    __swig_destroy__ = _Var.delete_SetInt
+    def push_back(self, *args): return _Var.DoubleVector_push_back(self, *args)
+    def front(self): return _Var.DoubleVector_front(self)
+    def back(self): return _Var.DoubleVector_back(self)
+    def assign(self, *args): return _Var.DoubleVector_assign(self, *args)
+    def resize(self, *args): return _Var.DoubleVector_resize(self, *args)
+    def insert(self, *args): return _Var.DoubleVector_insert(self, *args)
+    def reserve(self, *args): return _Var.DoubleVector_reserve(self, *args)
+    def capacity(self): return _Var.DoubleVector_capacity(self)
+    __swig_destroy__ = _Var.delete_DoubleVector
     __del__ = lambda self : None;
-SetInt_swigregister = _Var.SetInt_swigregister
-SetInt_swigregister(SetInt)
+DoubleVector_swigregister = _Var.DoubleVector_swigregister
+DoubleVector_swigregister(DoubleVector)
 
-class MapIntToFunction(_object):
+HGRAD = _Var.HGRAD
+HCURL = _Var.HCURL
+HDIV = _Var.HDIV
+HGRAD_DISC = _Var.HGRAD_DISC
+HCURL_DISC = _Var.HCURL_DISC
+HDIV_DISC = _Var.HDIV_DISC
+HDIV_FREE = _Var.HDIV_FREE
+L2 = _Var.L2
+CONSTANT_SCALAR = _Var.CONSTANT_SCALAR
+VECTOR_HGRAD = _Var.VECTOR_HGRAD
+VECTOR_HGRAD_DISC = _Var.VECTOR_HGRAD_DISC
+VECTOR_L2 = _Var.VECTOR_L2
+UNKNOWN_FS = _Var.UNKNOWN_FS
+OP_VALUE = _Var.OP_VALUE
+OP_GRAD = _Var.OP_GRAD
+OP_CURL = _Var.OP_CURL
+OP_DIV = _Var.OP_DIV
+OP_D1 = _Var.OP_D1
+OP_D2 = _Var.OP_D2
+OP_D3 = _Var.OP_D3
+OP_D4 = _Var.OP_D4
+OP_D5 = _Var.OP_D5
+OP_D6 = _Var.OP_D6
+OP_D7 = _Var.OP_D7
+OP_D8 = _Var.OP_D8
+OP_D9 = _Var.OP_D9
+OP_D10 = _Var.OP_D10
+OP_X = _Var.OP_X
+OP_Y = _Var.OP_Y
+OP_Z = _Var.OP_Z
+OP_DX = _Var.OP_DX
+OP_DY = _Var.OP_DY
+OP_DZ = _Var.OP_DZ
+OP_CROSS_NORMAL = _Var.OP_CROSS_NORMAL
+OP_DOT_NORMAL = _Var.OP_DOT_NORMAL
+OP_TIMES_NORMAL = _Var.OP_TIMES_NORMAL
+OP_TIMES_NORMAL_X = _Var.OP_TIMES_NORMAL_X
+OP_TIMES_NORMAL_Y = _Var.OP_TIMES_NORMAL_Y
+OP_TIMES_NORMAL_Z = _Var.OP_TIMES_NORMAL_Z
+OP_TIMES_NORMAL_T = _Var.OP_TIMES_NORMAL_T
+OP_VECTORIZE_VALUE = _Var.OP_VECTORIZE_VALUE
+TEST = _Var.TEST
+FIELD = _Var.FIELD
+TRACE = _Var.TRACE
+FLUX = _Var.FLUX
+UNKNOWN_TYPE = _Var.UNKNOWN_TYPE
+MIXED_TYPE = _Var.MIXED_TYPE
+class Var(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, MapIntToFunction, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Var, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, MapIntToFunction, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, Var, name)
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined")
     __repr__ = _swig_repr
-    def iterator(self): return _Var.MapIntToFunction_iterator(self)
-    def __iter__(self): return self.iterator()
-    def __nonzero__(self): return _Var.MapIntToFunction___nonzero__(self)
-    def __bool__(self): return _Var.MapIntToFunction___bool__(self)
-    def __len__(self): return _Var.MapIntToFunction___len__(self)
-    def __iter__(self): return self.key_iterator()
-    def iterkeys(self): return self.key_iterator()
-    def itervalues(self): return self.value_iterator()
-    def iteritems(self): return self.iterator()
-    def __getitem__(self, *args): return _Var.MapIntToFunction___getitem__(self, *args)
-    def __delitem__(self, *args): return _Var.MapIntToFunction___delitem__(self, *args)
-    def has_key(self, *args): return _Var.MapIntToFunction_has_key(self, *args)
-    def keys(self): return _Var.MapIntToFunction_keys(self)
-    def values(self): return _Var.MapIntToFunction_values(self)
-    def items(self): return _Var.MapIntToFunction_items(self)
-    def __contains__(self, *args): return _Var.MapIntToFunction___contains__(self, *args)
-    def key_iterator(self): return _Var.MapIntToFunction_key_iterator(self)
-    def value_iterator(self): return _Var.MapIntToFunction_value_iterator(self)
-    def __setitem__(self, *args): return _Var.MapIntToFunction___setitem__(self, *args)
-    def asdict(self): return _Var.MapIntToFunction_asdict(self)
-    def __init__(self, *args): 
-        this = _Var.new_MapIntToFunction(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    def empty(self): return _Var.MapIntToFunction_empty(self)
-    def size(self): return _Var.MapIntToFunction_size(self)
-    def clear(self): return _Var.MapIntToFunction_clear(self)
-    def swap(self, *args): return _Var.MapIntToFunction_swap(self, *args)
-    def get_allocator(self): return _Var.MapIntToFunction_get_allocator(self)
-    def begin(self): return _Var.MapIntToFunction_begin(self)
-    def end(self): return _Var.MapIntToFunction_end(self)
-    def rbegin(self): return _Var.MapIntToFunction_rbegin(self)
-    def rend(self): return _Var.MapIntToFunction_rend(self)
-    def count(self, *args): return _Var.MapIntToFunction_count(self, *args)
-    def erase(self, *args): return _Var.MapIntToFunction_erase(self, *args)
-    def find(self, *args): return _Var.MapIntToFunction_find(self, *args)
-    def lower_bound(self, *args): return _Var.MapIntToFunction_lower_bound(self, *args)
-    def upper_bound(self, *args): return _Var.MapIntToFunction_upper_bound(self, *args)
-    __swig_destroy__ = _Var.delete_MapIntToFunction
+    def ID(self): return _Var.Var_ID(self)
+    def name(self): return _Var.Var_name(self)
+    def displayString(self): return _Var.Var_displayString(self)
+    def rank(self): return _Var.Var_rank(self)
+    def space(self): return _Var.Var_space(self)
+    def varType(self): return _Var.Var_varType(self)
+    def op(self): return _Var.Var_op(self)
+    def termTraced(self): return _Var.Var_termTraced(self)
+    def grad(self): return _Var.Var_grad(self)
+    def div(self): return _Var.Var_div(self)
+    def curl(self, *args): return _Var.Var_curl(self, *args)
+    def dx(self): return _Var.Var_dx(self)
+    def dy(self): return _Var.Var_dy(self)
+    def x(self): return _Var.Var_x(self)
+    def y(self): return _Var.Var_y(self)
+    __swig_destroy__ = _Var.delete_Var
     __del__ = lambda self : None;
-MapIntToFunction_swigregister = _Var.MapIntToFunction_swigregister
-MapIntToFunction_swigregister(MapIntToFunction)
+Var_swigregister = _Var.Var_swigregister
+Var_swigregister(Var)
 
-class Solution(_object):
+class VarPtr(_object):
     __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Solution, name, value)
+    __setattr__ = lambda self, name, value: _swig_setattr(self, VarPtr, name, value)
     __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Solution, name)
+    __getattr__ = lambda self, name: _swig_getattr(self, VarPtr, name)
     __repr__ = _swig_repr
-    def __init__(self, *args): 
-        this = _Var.new_Solution(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    def solve(self): return _Var.Solution_solve(self)
-    def addSolution(self, *args): return _Var.Solution_addSolution(self, *args)
-    def clear(self): return _Var.Solution_clear(self)
-    def cubatureEnrichmentDegree(self): return _Var.Solution_cubatureEnrichmentDegree(self)
-    def setCubatureEnrichmentDegree(self, *args): return _Var.Solution_setCubatureEnrichmentDegree(self, *args)
-    def L2NormOfSolution(self, *args): return _Var.Solution_L2NormOfSolution(self, *args)
-    def projectOntoMesh(self, *args): return _Var.Solution_projectOntoMesh(self, *args)
-    def energyErrorTotal(self): return _Var.Solution_energyErrorTotal(self)
-    def setWriteMatrixToFile(self, *args): return _Var.Solution_setWriteMatrixToFile(self, *args)
-    def setWriteMatrixToMatrixMarketFile(self, *args): return _Var.Solution_setWriteMatrixToMatrixMarketFile(self, *args)
-    def setWriteRHSToMatrixMarketFile(self, *args): return _Var.Solution_setWriteRHSToMatrixMarketFile(self, *args)
-    def mesh(self): return _Var.Solution_mesh(self)
-    def bc(self): return _Var.Solution_bc(self)
-    def rhs(self): return _Var.Solution_rhs(self)
-    def ip(self): return _Var.Solution_ip(self)
-    def setBC(self, *args): return _Var.Solution_setBC(self, *args)
-    def setRHS(self, *args): return _Var.Solution_setRHS(self, *args)
-    def setIP(self, *args): return _Var.Solution_setIP(self, *args)
-    def save(self, *args): return _Var.Solution_save(self, *args)
-    __swig_getmethods__["load"] = lambda x: _Var.Solution_load
-    if _newclass:load = staticmethod(_Var.Solution_load)
-    def saveToHDF5(self, *args): return _Var.Solution_saveToHDF5(self, *args)
-    def loadFromHDF5(self, *args): return _Var.Solution_loadFromHDF5(self, *args)
-    def setUseCondensedSolve(self, *args): return _Var.Solution_setUseCondensedSolve(self, *args)
-    __swig_getmethods__["solution"] = lambda x: _Var.Solution_solution
-    if _newclass:solution = staticmethod(_Var.Solution_solution)
-    __swig_destroy__ = _Var.delete_Solution
-    __del__ = lambda self : None;
-Solution_swigregister = _Var.Solution_swigregister
-Solution_swigregister(Solution)
-
-def Solution_load(*args):
-  return _Var.Solution_load(*args)
-Solution_load = _Var.Solution_load
-
-def Solution_solution(*args):
-  return _Var.Solution_solution(*args)
-Solution_solution = _Var.Solution_solution
-
-class SolutionPtr(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, SolutionPtr, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, SolutionPtr, name)
-    __repr__ = _swig_repr
-    def __deref__(self): return _Var.SolutionPtr___deref__(self)
+    def __deref__(self): return _Var.VarPtr___deref__(self)
+    def __mul__(self, *args): return _Var.VarPtr___mul__(self, *args)
+    def __rmul__(self, *args): return _Var.VarPtr___rmul__(self, *args)
+    def __add__(self, *args): return _Var.VarPtr___add__(self, *args)
+    def __div__(self, *args): return _Var.VarPtr___div__(self, *args)
+    def __sub__(self, *args): return _Var.VarPtr___sub__(self, *args)
+    def __neg__(self): return _Var.VarPtr___neg__(self)
     def __init__(self): 
-        this = _Var.new_SolutionPtr()
+        this = _Var.new_VarPtr()
         try: self.this.append(this)
         except: self.this = this
-    __swig_destroy__ = _Var.delete_SolutionPtr
+    __swig_destroy__ = _Var.delete_VarPtr
     __del__ = lambda self : None;
-    def solve(self): return _Var.SolutionPtr_solve(self)
-    def addSolution(self, *args): return _Var.SolutionPtr_addSolution(self, *args)
-    def clear(self): return _Var.SolutionPtr_clear(self)
-    def cubatureEnrichmentDegree(self): return _Var.SolutionPtr_cubatureEnrichmentDegree(self)
-    def setCubatureEnrichmentDegree(self, *args): return _Var.SolutionPtr_setCubatureEnrichmentDegree(self, *args)
-    def L2NormOfSolution(self, *args): return _Var.SolutionPtr_L2NormOfSolution(self, *args)
-    def projectOntoMesh(self, *args): return _Var.SolutionPtr_projectOntoMesh(self, *args)
-    def energyErrorTotal(self): return _Var.SolutionPtr_energyErrorTotal(self)
-    def setWriteMatrixToFile(self, *args): return _Var.SolutionPtr_setWriteMatrixToFile(self, *args)
-    def setWriteMatrixToMatrixMarketFile(self, *args): return _Var.SolutionPtr_setWriteMatrixToMatrixMarketFile(self, *args)
-    def setWriteRHSToMatrixMarketFile(self, *args): return _Var.SolutionPtr_setWriteRHSToMatrixMarketFile(self, *args)
-    def mesh(self): return _Var.SolutionPtr_mesh(self)
-    def bc(self): return _Var.SolutionPtr_bc(self)
-    def rhs(self): return _Var.SolutionPtr_rhs(self)
-    def ip(self): return _Var.SolutionPtr_ip(self)
-    def setBC(self, *args): return _Var.SolutionPtr_setBC(self, *args)
-    def setRHS(self, *args): return _Var.SolutionPtr_setRHS(self, *args)
-    def setIP(self, *args): return _Var.SolutionPtr_setIP(self, *args)
-    def save(self, *args): return _Var.SolutionPtr_save(self, *args)
-    def load(self, *args): return _Var.SolutionPtr_load(self, *args)
-    def saveToHDF5(self, *args): return _Var.SolutionPtr_saveToHDF5(self, *args)
-    def loadFromHDF5(self, *args): return _Var.SolutionPtr_loadFromHDF5(self, *args)
-    def setUseCondensedSolve(self, *args): return _Var.SolutionPtr_setUseCondensedSolve(self, *args)
-    def solution(self, *args): return _Var.SolutionPtr_solution(self, *args)
-SolutionPtr_swigregister = _Var.SolutionPtr_swigregister
-SolutionPtr_swigregister(SolutionPtr)
+    def ID(self): return _Var.VarPtr_ID(self)
+    def name(self): return _Var.VarPtr_name(self)
+    def displayString(self): return _Var.VarPtr_displayString(self)
+    def rank(self): return _Var.VarPtr_rank(self)
+    def space(self): return _Var.VarPtr_space(self)
+    def varType(self): return _Var.VarPtr_varType(self)
+    def op(self): return _Var.VarPtr_op(self)
+    def termTraced(self): return _Var.VarPtr_termTraced(self)
+    def grad(self): return _Var.VarPtr_grad(self)
+    def div(self): return _Var.VarPtr_div(self)
+    def curl(self, *args): return _Var.VarPtr_curl(self, *args)
+    def dx(self): return _Var.VarPtr_dx(self)
+    def dy(self): return _Var.VarPtr_dy(self)
+    def x(self): return _Var.VarPtr_x(self)
+    def y(self): return _Var.VarPtr_y(self)
+VarPtr_swigregister = _Var.VarPtr_swigregister
+VarPtr_swigregister(VarPtr)
 
 # This file is compatible with both classic and new-style classes.
 

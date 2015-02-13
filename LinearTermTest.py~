@@ -3,6 +3,8 @@ import LinearTerm
 import Function
 import Var
 import VarFactory
+import Mesh
+import MeshFactory
 import unittest
 
 class LinearTermTest(unittest.TestCase):
@@ -11,76 +13,120 @@ class LinearTermTest(unittest.TestCase):
     lt = LinearTerm.LinearTerm()
     # checks if linearTerm is empty
     self.assertEqual(lt.rank(), -1)
-    # write code to make VarPtr with VarType "test"
     varFact = VarFactory.VarFactory()
     test1 = varFact.fieldVar("x")
     test2 = varFact.fieldVar("y")
-    self.assertEqual(test1.termType(), 'FIELD')
 
-
-    #add overloads
-    ltp = test1 + test2
-    eval = ltp.evaluate( #var + var
-    #add more stuff...
     test3 = varFact.fieldVar("2x")
-    ltp2 = ltp + test3
-    eval = ltp2.evaluate( #LinearTerm + Var
-    #add more stuff...
     test4 = varFact.fieldVar("2y")
+    ltp = test1 + test2
+    self.assertEqual(ltp.rank(),0)
+    bool = (ltp.termType() == Var.FIELD)
+    self.assertTrue(bool)
+    #self.assertEqual(ltp.termType(), Var.FIELD)
+
+    varFunctions = LinearTerm.map_int_FunctionPtr({test1.ID(): Function.Function_xn(1), test2.ID(): Function.Function_yn(1), test3.ID(): Function.Function_xn(1) * 2, test4.ID(): Function.Function_yn(1) * 2})
+    varID = (test1.ID(), test2.ID())
+    #add overloads
+
+    eval = ltp.evaluate(varFunctions)
+    self.assertEqual(eval.evaluate(1,1), 2.0)
+    self.assertEqual(ltp.varIDs(), varID) # tests varIDs()
+    #var + var (x+y)
+    ltp2 = ltp + test3
+    eval = ltp2.evaluate(varFunctions)
+    self.assertEqual(eval.evaluate(1,1), 4.0)
+    #LinearTerm + Var (x + y + 2x)
     ltp2 = test3 + test4
     ltp3 = ltp + ltp2
-    eval = ltp3.evaluate( #LinearTerm + LinearTerm
-    #add more stuff...
+    eval = ltp3.evaluate(varFunctions)
+    self.assertEqual(eval.evaluate(1,1), 6.0)
+    #LinearTerm + LinearTerm (x + y + 2x + 2y)
     ltp = test3 + ltp2
-    eval = ltp.evaluate( #Var + LinearTerm
-    #add more stuff...
-
+    eval = ltp.evaluate(varFunctions)
+    self.assertEqual(eval.evaluate(1,1), 6.0)
+    #Var + LinearTerm (2x + 2x + 2y)
 
 
     #Mul overloads
     funPtr = Function.Function_xn(2)
     ltp = funPtr * test3
-    eval = ltp.eval(  #Function * Var
-    #add more stuff...
+    eval = ltp.evaluate(varFunctions)
+    self.assertEqual(eval.evaluate(3,1), 54.0)
+    #Function * Var 2x*x^2
     ltp = test3 * funPtr
-    eval = ltp.eval(   #Var * Function
-    #add more stuff...
+    eval = ltp.evaluate(varFunctions)
+    self.assertEqual(eval.evaluate(2,1), 16.0)
+    #Var * Function 2x*x^2
     ltp = test3 * 2.0
-    eval = ltp.eval(   #Var * Double
-    #add more stuff...
+    eval = ltp.evaluate(varFunctions)
+    self.assertEqual(eval.evaluate(1,1), 4.0)
+    #Var * Double   2x * 2
     ltp = 2.0 * test3
-    eval = ltp.eval(   # Double * Var
-    #add more stuff...
+    eval = ltp.evaluate(varFunctions)
+    self.assertEqual(eval.evaluate(1,1), 4.0)
+    # Double * Var   2x * 2
 
-    # dont know what to do with vector doubles
+    doubV = [1.0, 1.0]
+    ltp = test1 * doubV
+    self.assertEqual(ltp.rank(),1)
+    eval = ltp.evaluate(varFunctions) #gives vector-valued function
+    x = eval.x()
+    y = eval.y()
+    self.assertEqual(x.evaluate(2,1), 2.0)
+    self.assertEqual(x.evaluate(5,3), 5.0)
+    ltp = doubV * test1
+    eval = ltp.evaluate(varFunctions)
+    x = eval.x()
+    y = eval.y()
+    self.assertEqual(x.evaluate(2,1), 2.0)
+    self.assertEqual(x.evaluate(4,3), 4.0)
 
     ltp = test3 + test4
     ltp2 = funPtr * ltp
-    eval = ltp2.eval(   # Function * LinearTerm
+    eval = ltp2.evaluate(varFunctions)
+    self.assertEqual(eval.evaluate(2,4), 48.0)
+    # Function * LinearTerm  x^2 * (2x + 2y)
 
 
     #Div overloads
     ltp = test3 / 2.0
-    eval = ltp.eval(   # Var / Double
+    eval = ltp.evaluate(varFunctions)
+    self.assertEqual(eval.evaluate(1,0), 1.0)
+    # Var / Double  2x/2
     ltp = test3 / funPtr
-    eval = ltp.eval(   # Var / function
+    eval = ltp.evaluate(varFunctions)
+    self.assertEqual(eval.evaluate(1,0), 2.0)
+    # Var / function  2x/(x^2)
     
 
     # Sub overloads
     ltp = test3 - test4
-    eval = ltp.eval(  # Var - Var
+    eval = ltp.evaluate(varFunctions)
+    self.assertEqual(eval.evaluate(4,1), 6.0)
+    # Var - Var 2x - 2y
     ltp = - test3
-    eval = ltp.eval(  # - Var
+    eval = ltp.evaluate(varFunctions)
+    self.assertEqual(eval.evaluate(1,1), -2.0)
+    # - Var  -2x
     ltp2 = -ltp
-    eval = ltp2.eval(  # - LinearTerm
+    eval = ltp2.evaluate(varFunctions)
+    self.assertEqual(eval.evaluate(1,1), 2.0)
+    # - LinearTerm  -(-2x)
     ltp = test3 + test4
     ltp2 = ltp - test3
-    eval = ltp2.evaluate( # LinearTerm - Var
-    ltp2 = ltp - test4
-    eval = ltp2.evaluate( #Var - LinearTerm
+    eval = ltp2.evaluate(varFunctions)
+    self.assertEqual(eval.evaluate(1,1), 2.0)
+    # LinearTerm - Var   (2x + 2y) - 2x
+    ltp2 = test4 - ltp
+    eval = ltp2.evaluate(varFunctions)
+    self.assertEqual(eval.evaluate(1,1), -2.0)
+    #Var - LinearTerm    2y - (2x + 2y)
     ltp2 = test1 + test2
     ltp3 = ltp - ltp2
-    eval = ltp3.evaluate( #LinearTerm - LinearTerm
+    eval = ltp3.evaluate(varFunctions)
+    self.assertEqual(eval.evaluate(1,1), 2.0)
+    #LinearTerm - LinearTerm  (2x + 2y)-(x+y)
 
 
 
